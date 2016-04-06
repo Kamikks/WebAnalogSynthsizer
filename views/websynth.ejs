@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/components/platform/platform.js"></script>
+    <link rel="import" href="/javascripts/components/controls.html">
+    <script type="text/javascript" src="/javascripts/components/polymer.js"></script>
+    <script type="text/javascript" src="/javascripts/websynth.js" defer="defer"></script>
+
+  </head>
+  <body>
+	<div style="background: url(/images/Panel.png) no-repeat;">
+		<div>
+			<div class="main-pane">
+				<div class="column">
+					<div class="node-pane">
+						<h2>Oscillator1</h2>
+						<div id="osc1Type" class="osc-column">
+							<ul>
+								<li>
+									<input id="osc1Sine" type="radio" name="osc1_type">
+									<label class="label" for="osc1Sine">Sine</label> 
+								</li>
+								<li>
+									<input id="osc1Saw" type="radio" name="osc1_type" checked>
+									<label class="label" for="osc1Saw">Saw</label> 
+								</li>
+								<li>
+									<input id="osc1Tri" type="radio" name="osc1_type">
+									<label class="label" for="osc1Tri">Triangle</label> 
+								</li>
+								<li>
+									<input id="osc1Sqr" type="radio" name="osc1_type">
+									<label class="label" for="osc1Sqr">Square</label> 
+								</li>
+							</ul>
+						</div>
+						<div class="osc-column">
+       			  <webaudio-knob id="osc1GainKnob" src="/images/myknob.png" sprites="30" value="30" defvalue="100"></webaudio-knob>
+							<label class="gen-label" for="osc1GainKnob">Gain</label>
+						</div>
+					</div>
+					<div class="node-pane">
+						<h2>Oscillator2</h2>
+						<div id="osc2Type" class="osc-column">
+							<ul>
+								<li>
+									<input id="osc2Sine" type="radio" name="osc2Type" >
+									<label class="label" for="osc2Sine">Sine</label> 
+								</li>
+								<li>
+									<input id="osc2Saw" type="radio" name="osc2Type" checked>
+									<label class="label" for="osc2Saw">Saw</label> 
+								</li>
+								<li>
+									<input id="osc2Tri" type="radio" name="osc2Type">
+									<label class="label" for="osc2Tri">Triangle</label> 
+								</li>
+								<li>
+									<input id="osc2Sqr" type="radio" name="osc2Type">
+									<label class="label" for="osc2Sqr">Square</label> 
+								</li>
+							</ul>
+						</div>
+						<div class="osc-column">
+         	    <webaudio-knob id="osc2GainKnob" src="/images/myknob.png" sprites="30" value="20" defvalue="100"></webaudio-knob>
+							<label class="gen-label" for="osc2GainKnob">Gain</label>
+						</div>
+					</div>
+				</div>
+		  	<div class="column">
+				  <div class="node-pane">
+					  <h2>Envelope</h2>
+					  <div id="gainEnvelope" class="eg-column">
+       		 	  <webaudio-knob id="attackKnob" src="/images/myknob.png" sprites="30" value="30"></webaudio-knob>
+					 		<label class="gen-label" for="attackKnob">Attack</label> 
+              <webaudio-knob id="decayKnob" src="/images/myknob.png" sprites="30" min="1" ></webaudio-knob>
+						  <label class="gen-label" for="decayKnob">Decay</label> 
+            	<webaudio-knob id="sustainKnob" src="/images/myknob.png" sprites="30" value="100" ></webaudio-knob>
+							<label class="gen-label" for="sustainKnob">Sustain</label> 
+     	        <webaudio-knob id="releaseKnob" src="/images/myknob.png" sprites="30" value="1" min="1"></webaudio-knob>
+							<label class="gen-label" for="releaseKnob">Release</label> 
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<div class="node-pane">
+						<h2>Filter</h2>
+						<div id="filterType" class="filter-column">
+							<ul>
+								<li>
+									<input id="lp" type="radio" name="filterType" checked>
+									<label class="label" for="lp">Low Pass</label> 
+								</li>
+								<li>
+									<input id="hp" type="radio" name="filterType">
+									<label class="label" for="hp">High Pass</label> 
+								</li>
+								<li>
+									<input id="bp" type="radio" name="filterType">
+									<label class="label" for="bp">Band Pass</label> 
+								</li>
+							</ul>
+						</div>
+						<div class="filter-column">
+   		       	<webaudio-knob id="filterFreqKnob" src="/images/myknob.png" sprites="30" min="50" max="10000" value="5000" defvalue="5000"></webaudio-knob>
+							<label class="gen-label" for="filterFreqKnob">Frequency</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	
+	<div>
+    <webaudio-keyboard id="keyboard" keys="25" width="660"></webaudio-keyboard>
+	</div>
+  </body>
+</html>

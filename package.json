@@ -1,0 +1,12 @@
+{
+  "name": "websynth",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "~2.3.3",
+    "express": "~4.13.1"
+  }
+}
