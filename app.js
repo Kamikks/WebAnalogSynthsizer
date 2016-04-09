@@ -9,11 +9,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
-  res.render('index', { title: 'My Audio Apps' });
-});
-
-app.get('/websynth', function(req, res) {
-        res.render('websynth', {title: 'websynth'})
+  res.render('websynth', { title: 'websynth' });
 });
 
 
