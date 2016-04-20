@@ -1,102 +1,88 @@
-.main-pane {
-	width: 660px;
-	margin: 0 -10px 0 0;
-	_zoom: 1;
-	overflow: hidden;
-
+body {
+  padding-top: 60px;
+  font-family: Impact;
 }
 
-.main-pane .column {
-	width: 200px;
-	min-height: 110px;
-	_height: 110px;
-	margin-right: 10px;
-  margin-left: 10px;
-	float: left;
+section {
+  overflow :auto;
 }
 
-.main-pane .column .node-pane {
-	width: 180px;
-	min-height: 110px;
-	margin: 5px;
-	display: inline-block;
+textares {
+  resize: vertical;
 }
 
-.main-pane .column .node-pane h2 {
-	background: #666;
-	padding: 5px;
-	border-bottom: 1px solid #999;
-	color: #FFF;
-	margin: 0;
-	text-align: center;
+.center {
+  text-align: center;
 }
 
-.main-pane .column .osc-column {
-	float: left;
-	text-align: center;
-	padding: 5px
+.center h1 {
+  margin-bottom: 10px;
 }
 
-.main-pane .column .filter-column {
-	text-align: center;
-	padding: 5px
-}
+/* header */
+#logo {
+  text-align: center;
+  float: none;
+  font-size: 2.5em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 4px;
+  font-weight: bold;
+} 
 
-.main-pane .column .node-pane .eg-column {
-	float: left;
-	text-align: center;
-	padding: 5px;
-  width: 100%;
-}
-
-input[type=radio] {
-	display: none;
-}
-
-input[type="radio"]:checked + label {
-	background: #fff;
-	color: #000;
-}
-
-.label:hover {
-	background-color: #aaa;
-	color: #000;
-}
-
-.label {
-	color: #fff;
-	border: #dddddd solid 2px;
-	display: block;
-	height: 30px;
-	line-height: 30px;
-	padding-left: 10px;
-	padding-right: 10px;
-	cursor: pointer;
+#background-panel {
+  background-color: #fff;
+  padding: 3px;
 }
 
 ul {
-	margin: 0px;
-	padding: 0px;
+  list-style: none;
+  padding-left: 10px;
 }
 
-ul li {
-	list-style-type: none;
-	list-style-position: outside;
-	padding: 4px;
-}	
-
-
-body {
-	font-family: Impact;
-	color: #fff;
+.card {
+  background-color: #fff;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  overflow: hidden;
+  margin-bottom: 5px;
 }
 
-
-.gen-label {
-	color: #fff;
-	height: 30px;
+.card:before {
+  content: '';
+  position: absolute;
+  background: inherit;
+  -webkit-filter: blur(10px) saturate(2);
 }
 
-webaudio-knob #wac-knob {
-	margin: auto;
+.card .card-header {
+  border-left: 10px solid #ccc;
+  font-weight: bold;
+  padding: 2px;
+  padding-left: 10px;
 }
+
+.card .card-body {
+  padding: 1px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.col-extend {
+  padding: 0px;
+  width: inherit;
+  text-align: center;
+}
+
+.knob-large {
+  width: 128;
+  height: 70;
+}
+
+.knob-mid {
+  width: 48;
+  height: 80;
+}
+

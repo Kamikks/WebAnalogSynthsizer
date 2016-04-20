@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "ejs": "~2.3.3",
-    "express": "~4.13.1"
+    "express": "~4.13.1",
+    "bootstrap": "latest",
+    "less-middleware": "latest",
+    "chart.js": "latest"
   }
 }
