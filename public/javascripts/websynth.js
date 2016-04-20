@@ -46,14 +46,13 @@ onload = function() {
 
     var dest = new DestCard('MASTER');
     keyboard.connect(osc1);
-    osc1.connect(dest);
-    //osc1.connect(env1);
-    //osc1.connect(env2);
-    //osc1.connect(env3);
-    //osc2.connect(env2);
-    //osc3.connect(env3);
-    //osc3.connect(env3);
-    //env1.connect(dest);
+    osc1.connect(env1);
+    osc1.connect(env2);
+    osc1.connect(env3);
+    osc2.connect(env2);
+    osc3.connect(env3);
+    osc3.connect(env3);
+    env1.connect(dest);
 
 //    adsr2 = new Chart2();
 //    adsr2.draw();
@@ -120,14 +119,11 @@ function OscCard(parent, name, color) {
     this.osc = context.createOscillator();
     this.osc.frequency.value = freq;
     this.osc.type = SAW;
-    vol = context.createGain();
+    var vol = context.createGain();
     this.osc.connect(vol);
-    vol.gain.value = (this.env[0].currentValue - 120) / 2;
-    console.log(vol.gain.value);
-    //this.nextCard[0].play(this.osc);
-    this.osc.connect(context.destination);
+    vol.gain.value = (this.env[0].currentValue - 120) / 300;
+    this.nextCard[0].play(vol);
     this.osc.start(0);
-    console.log(this.osc);
   }
 
   this.stop = function() {
