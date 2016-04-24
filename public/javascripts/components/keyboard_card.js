@@ -27,7 +27,7 @@ function KeyboardCard(parent, name, color) {
   this.keyboard.addEventListener('change', function(e) {
     if(e.note[0]){
       var freq = KEYC * Math.pow(1.0595, e.note[1]);
-console.log(e.note[1]);
+      //console.log(e.note[1]);
       for(var i = 0; i < _this.nextCard.length; i++) {
         _this.nextCard[i].play(freq);
       }

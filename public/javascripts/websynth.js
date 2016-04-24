@@ -9,25 +9,19 @@ onload = function() {
 //    adsr.draw();
 
     var deck2 = document.getElementById('deck2');
-    var env1 = new EnvCard(deck2, 'ENV1', '#123457');
-    var env2 = new EnvCard(deck2, 'ENV2', '#a23457');
-    var env3 = new EnvCard(deck2, 'ENV3', '#3bd457');
+    var env1 = new EnvCard(deck2, 'ENV1', '#123457', null);
+    var env1_2 = new EnvCard(deck2, 'ENV1', '#123457', env1);
+    var env2 = new EnvCard(deck2, 'ENV2', '#a23457', null);
 
     var dest = new DestCard('MASTER');
     keyboard.connect(osc1);
     keyboard.connect(osc2);
     keyboard.connect(osc3);
     osc1.connect(env1);
-    osc1.connect(env2);
-    osc1.connect(env3);
-    osc2.connect(env1);
-    osc2.connect(env2);
-    osc2.connect(env3);
+    osc2.connect(env1_2);
     osc3.connect(env2);
-    osc3.connect(env3);
     env1.connect(dest);
     env2.connect(dest);
-    env3.connect(dest);
 
 //    adsr2 = new Chart2();
 //    adsr2.draw();
