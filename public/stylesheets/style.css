@@ -86,3 +86,7 @@ ul {
   height: 80;
 }
 
+.dragenter {
+  border: 2px dashed #000;
+}
+

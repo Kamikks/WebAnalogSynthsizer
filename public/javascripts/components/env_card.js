@@ -1,14 +1,20 @@
 function EnvCard(parent, name, color, envCard) {
+  // Create DOM
   this.env = [];
   this.card = null;
   this.name = name;
+  this.ctrls = new Object();
+  this.nextCard = [];
 
   if(envCard !== null) {
+    this.name = envCard.name;
     this.card = envCard.card;
-    this.env = envCard.env;
+    this.ctrls = envCard.ctrls;
+    console.log(this.ctrls);
   } else {
     this.card = document.createElement('div');
     this.card.classList.add("card");
+    this.card.draggable = true;
     parent.appendChild(this.card);
     var cardHeader = document.createElement('div');
     cardHeader.classList.add("card-header");
@@ -31,13 +37,47 @@ function EnvCard(parent, name, color, envCard) {
       colEnv[key[i-1]].classList.add("col-md-2");
       colEnv[key[i-1]].classList.add("col-extend");
       innerRow.appendChild(colEnv[key[i-1]]);
-      this.env[key[i-1]] = new Knob(colEnv[key[i-1]], label[i-1], MIDDLE, color)
-      this.env[key[i-1]].draw(200);
-      //console.log(key[i-1]);
+      this.ctrls[key[i-1]] = new Knob(colEnv[key[i-1]], label[i-1], name + '_' + label[i-1], MIDDLE, color)
+      this.ctrls[key[i-1]].draw(200);
+      //console.log("this is " + this + ", key is " + name + label[i-1]);
     }
+
+    // Define EventListener
+    // TODO: integrate definition of each card
+    var _this = this;
+    this.card.addEventListener('dragstart', function(e) {
+      this.style.opacity = '0.4';
+      _tmpDrgSrc = _this;
+      e.dataTransfer.effectAllowed = 'move';
+    }, false);
+    this.card.addEventListener('dragenter', function() {
+      this.classList.add('dragenter');
+    }, false);
+    this.card.addEventListener('dragleave', function() {
+      this.classList.remove('dragenter');
+    }, false);
+    this.card.addEventListener('dragover', function(e) {
+      if(e.preventDefault) {
+	e.preventDefault();
+      }
+      e.dataTransfer.dropEffect = 'move';
+    }, false);
+    this.card.addEventListener('drop', function(e) {
+      if(e.stopPropagation) {
+	e.stopPropagation();
+      }
+      if(_tmpDrgSrc.card != this) {
+	parent.insertBefore(_tmpDrgSrc.card, this);
+      }
+      return false;
+    }, false);
+    this.card.addEventListener('dragend', function(e) {
+      this.style.opacity = '1.0';
+      this.classList.remove('dragenter');
+    }, false);
   }
 
-  this.nextCard = [];
+  // Define Method
   this.envelope = null;
   this.startTime = 0;
 
@@ -52,20 +92,20 @@ function EnvCard(parent, name, color, envCard) {
     for(var i = 0; i < this.nextCard.length; i++) {
       this.nextCard[i].play(this.envelope);
     }
+    // attackLevel: 0[s]
     this.startTime = context.currentTime;
+    this.envelope.gain.setValueAtTime(0, this.startTime);
   }
 
   this.postSend = function() {
-    // attackLevel: 0 - 1[s]
     // TODO: create get currentValue method
-    this.envelope.gain.setValueAtTime(0, this.startTime);
     // attackTime: 0 - 3[s]
-    var attackTime = this.startTime + parseFloat((this.env['AttackTime'].currentValue - 120) / 100);
+    var attackTime = this.startTime + parseFloat((this.ctrls['AttackTime'].currentValue - 120) / 100);
     // decayTime: 0 - 3[s]
-    var decayTime = parseFloat((this.env['DecayTime'].currentValue - 120) / 100);
-    var decayLevel = (this.env['DecayLevel'].currentValue - 120) / 300;
+    var decayTime = parseFloat((this.ctrls['DecayTime'].currentValue - 120) / 100);
+    var decayLevel = (this.ctrls['DecayLevel'].currentValue - 120) / 300;
     // sustainLevel
-    var sustainLevel = (this.env['SustainLevel'].currentValue - 120) / 300;
+    var sustainLevel = (this.ctrls['SustainLevel'].currentValue - 120) / 300;
     //attack
     this.envelope.gain.linearRampToValueAtTime(decayLevel, attackTime);
     //decay
@@ -77,7 +117,7 @@ function EnvCard(parent, name, color, envCard) {
     this.envelope.gain.cancelScheduledValues(currentTime);
     this.envelope.gain.setValueAtTime(this.envelope.gain.value, currentTime);
     // releaseTime: 0 - 3[s]
-    var releaseTime = (this.env['ReleaseTime'].currentValue - 120) / 300;
+    var releaseTime = (this.ctrls['ReleaseTime'].currentValue - 120) / 300;
     this.envelope.gain.linearRampToValueAtTime(0, currentTime + releaseTime);
   }
 }

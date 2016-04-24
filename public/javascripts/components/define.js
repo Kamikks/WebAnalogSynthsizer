@@ -14,3 +14,5 @@ const LOWSHELF = 'lowshelf';
 const HIGHSHELF = 'highshelf';
 const PEACKING = 'peaking';
 const NOTCH = 'notch';
+
+var _tmpDrgSrc = null;
