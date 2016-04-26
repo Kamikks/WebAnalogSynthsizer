@@ -87,6 +87,12 @@ ul {
 }
 
 .dragenter {
+  margin-top: 50px;
   border: 2px dashed #000;
 }
 
+.close-btn {
+  float: right;
+  margin: 3px;
+  border: 2px groove;
+}

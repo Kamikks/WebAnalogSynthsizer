@@ -12,6 +12,14 @@ function KeyboardCard(parent, name, color) {
   cardHeader.style.borderLeft = "10px solid " + color;
   cardHeader.textContent = name;
   this.card.appendChild(cardHeader);
+
+  this.closeBtn = document.createElement('button');
+  this.closeBtn.type = "button"
+  this.closeBtn.classList.add("btn");
+  this.closeBtn.classList.add("btn-default");
+  this.closeBtn.classList.add("close-btn");
+  cardHeader.appendChild(this.closeBtn);
+
   var cardBody = document.createElement('div');
   cardBody.classList.add("card-body");
   this.card.appendChild(cardBody);
@@ -72,4 +80,13 @@ function KeyboardCard(parent, name, color) {
       }
     }
   });
+
+  this.closeBtn.addEventListener('click', function() {
+    _this.close();
+  });
+
+  this.close = function() {
+    this.card.parentNode.removeChild(this.card);
+  }
+
 }

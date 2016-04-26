@@ -4,6 +4,7 @@ function OscCard(parent, name, type, color) {
   this.name = name;
   this.osc = null;
   this.ctrls = new Object();
+  this.closeBtn = null;
 
   this.card = document.createElement('div');
   this.card.classList.add("card");
@@ -13,6 +14,12 @@ function OscCard(parent, name, type, color) {
   cardHeader.classList.add("card-header");
   cardHeader.style.borderLeft = "10px solid " + color;
   cardHeader.textContent = name;
+  this.closeBtn = document.createElement('button');
+  this.closeBtn.type = "button"
+  this.closeBtn.classList.add("btn");
+  this.closeBtn.classList.add("btn-default");
+  this.closeBtn.classList.add("close-btn");
+  cardHeader.appendChild(this.closeBtn);
   this.card.appendChild(cardHeader);
   var cardBody = document.createElement('div');
   cardBody.classList.add("card-body");
@@ -84,7 +91,16 @@ function OscCard(parent, name, type, color) {
     this.classList.remove('dragenter');
   }, false);
 
+  this.closeBtn.addEventListener('click', function() {
+    _this.close();
+  });
+
   // Define Method 
+  // TODO: disconnect prev and next cards.
+  this.close = function() {
+    this.card.parentNode.removeChild(this.card);
+  }
+
   this.connect = function(nextCard) {
     console.log(nextCard);
     var colSender = null;

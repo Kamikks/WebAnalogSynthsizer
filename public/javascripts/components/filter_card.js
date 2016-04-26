@@ -13,6 +13,14 @@ function FilterCard(parent, name, type, color) {
   cardHeader.style.borderLeft = "10px solid " + color;
   cardHeader.textContent = name;
   this.card.appendChild(cardHeader);
+
+  this.closeBtn = document.createElement('button');
+  this.closeBtn.type = "button"
+  this.closeBtn.classList.add("btn");
+  this.closeBtn.classList.add("btn-default");
+  this.closeBtn.classList.add("close-btn");
+  cardHeader.appendChild(this.closeBtn);
+
   var cardBody = document.createElement('div');
   cardBody.classList.add("card-body");
   this.card.appendChild(cardBody);
@@ -68,9 +76,19 @@ function FilterCard(parent, name, type, color) {
     this.classList.remove('dragenter');
   }, false);  
 
+  this.closeBtn.addEventListener('click', function() {
+    _this.close();
+  });
+
+
   this.filter = null;
 
   // Define method
+
+  this.close = function() {
+    this.card.parentNode.removeChild(this.card);
+  }
+
   this.connect = function(nextCard) {
     var i = this.nextCard.length;
     this.nextCard[i] = nextCard;
