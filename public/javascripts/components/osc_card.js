@@ -1,6 +1,7 @@
 function OscCard(parent, name, type, color) {
   // Create DOM
   this.nextCard = [];
+  this.prev = null;
   this.name = name;
   this.osc = null;
   this.ctrls = new Object();
@@ -26,6 +27,7 @@ function OscCard(parent, name, type, color) {
   this.card.appendChild(cardBody);
   var innerRow = document.createElement('div');
   innerRow.classList.add("row");
+  innerRow.classList.add("row-extend");
   cardBody.appendChild(innerRow);
 
 
@@ -47,62 +49,49 @@ function OscCard(parent, name, type, color) {
   // Define EventListener
   // TODO: integrate definition of each card
   var _this = this;
+  var insertTo = document.createElement('div')
   this.card.addEventListener('dragstart', function(e) {
     this.style.opacity = '0.4';
-    _tmpDrgSrc = _this;
+    _tmpDrgSrc = this;
     e.dataTransfer.effectAllowed = 'move';
-//    e.dataTransfer.setData('text/html', this.innerHTML);
   }, false);
-  this.card.addEventListener('dragenter', function() {
-    this.classList.add('dragenter');
+  this.card.addEventListener('dragenter', function(e) {
+    if(this != _tmpDrgSrc) { 
+      this.parentNode.insertBefore(insertTo, this);
+      insertTo.classList.add('dragenter');
+    }
   }, false);
-  this.card.addEventListener('dragleave', function() {
+  insertTo.addEventListener('dragleave', function() {
     this.classList.remove('dragenter');
+    this.parentNode.removeChild(this);
   }, false); 
-  this.card.addEventListener('dragover', function(e) {
+  insertTo.addEventListener('dragover', function(e) {
     if(e.preventDefault) {
       e.preventDefault();
     }
     e.dataTransfer.dropEffect = 'move';  
   }, false);
-  this.card.addEventListener('drop', function(e) {
+  insertTo.addEventListener('drop', function(e) {
     if(e.stopPropagation) {
       e.stopPropagation();
     }
-    if(_tmpDrgSrc.card != this) {
-      parent.insertBefore(_tmpDrgSrc.card, this);
-//      _tmpDrgSrc.card.innerHTML = this.innerHTML;
-//      this.innerHTML = e.dataTransfer.getData('text/html');
-//      console.log(_this);
-//      for(key in _tmpDrgSrc.ctrls) {
-//        _tmpDrgSrc.ctrls[key].draw(_tmpDrgSrc.ctrls[key].currentValue);
-//        _tmpDrgSrc.ctrls[key].init();
-//      }
-//      for(key in _this.ctrls) {
-//        _this.ctrls[key].draw(_this.ctrls[key].currentValue);
-//        _this.ctrls[key].init();
-//      }
-
+    if(_tmpDrgSrc != _this.card) {
+      _this.card.parentNode.insertBefore(_tmpDrgSrc, _this.card);
+      _tmpDrgSrc.style.opacity = '1.0';
+      this.classList.remove('dragenter');
+      this.parentNode.removeChild(this);
     }
     return false;
   }, false);
-  this.card.addEventListener('dragend', function(e) {
-    this.style.opacity = '1.0';
-    this.classList.remove('dragenter');
-  }, false);
 
   this.closeBtn.addEventListener('click', function() {
-    _this.close();
+    _this.disconnect();
+    _this.card.parentNode.removeChild(_this.card);
   });
 
   // Define Method 
   // TODO: disconnect prev and next cards.
-  this.close = function() {
-    this.card.parentNode.removeChild(this.card);
-  }
-
   this.connect = function(nextCard) {
-    console.log(nextCard);
     var colSender = null;
     colSender = document.createElement('div');
     colSender.classList.add("col-md-4");
@@ -110,7 +99,12 @@ function OscCard(parent, name, type, color) {
     innerRow.appendChild(colSender);
     this.ctrls['SEND'] = new Knob(colSender, nextCard.name, name + '_' + nextCard.name, MIDDLE, color)
     this.ctrls['SEND'].draw(300);
+    nextCard.prev = this;
     this.nextCard[0] = nextCard;
+  }
+
+  this.disconnect = function() {
+    this.prev.nextCard.splice(this.prev.nextCard.indexOf(this.card), 1);
   }
 
   this.play = function(freq) {

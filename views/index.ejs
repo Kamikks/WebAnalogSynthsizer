@@ -17,7 +17,8 @@
     <script type="text/javascript" src="/javascripts/components/graphic_env_card.js"></script>
     <script type="text/javascript" src="/javascripts/components/keyboard_card.js"></script>
     <script type="text/javascript" src="/javascripts/components/dest_card.js"></script>
-    <script type="text/javascript" src="/javascripts/websynth.js" defer="defer"></script>
+    <script type="text/javascript" src="/javascripts/load_dialog.js"></script>
+    <script type="text/javascript" src="/javascripts/main.js" defer="defer"></script>
     <link rel='stylesheet' href='/components/bootstrap/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
@@ -33,31 +34,31 @@
 	    <div class="modal-header">
 	      <h4 class="modal-title" id="modal-label">Add Card</h4>
 	    </div>
-	    <div class="modal-body" id="cardSelector">
-              <div class="btn-group-vertical" data-toggle="buttons">
+	    <div class="modal-body">
+              <div class="btn-group-vertical" id="cardSelector" data-toggle="buttons">
                 <label class="btn btn-primary active">
-                  <input type="radio" name="sawtooth">Sawtooth Oscillator</input>
+                  <input type="radio" name="cardSelector" value="sawtooth">Sawtooth Oscillator</input>
                 </label>
-                <label class="btn btn-primary active">
-                  <input type="radio" name="square">Square Oscillator</input>
+                <label class="btn btn-primary">
+                  <input type="radio" name="cardSelector" value="square">Square Oscillator</input>
                 </label>
-                <label class="btn btn-primary active">
-                  <input type="radio" name="sine">Sine Oscillator</input>
+                <label class="btn btn-primary">
+                  <input type="radio" name="cardSelector" value="sine">Sine Oscillator</input>
                 </label>
-                <label class="btn btn-primary active">
-                  <input type="radio" name="envelope">Envelope Generator</input>
+                <label class="btn btn-primary">
+                  <input type="radio" name="cardSelector" value="envelope">Envelope Generator</input>
                 </label>
-                <label class="btn btn-primary active">
-                  <input type="radio" name="lowpass">Lowpas Filter</input>
+                <label class="btn btn-primary">
+                  <input type="radio" name="cardSelector" value="lowpass">Lowpas Filter</input>
                 </label>
-                <label class="btn btn-primary active">
-                  <input type="radio" name="keyboard">Keyboard</input>
+                <label class="btn btn-primary">
+                  <input type="radio" value="keyboard">Keyboard</input>
                 </label>
               </div>
               <select class="form-control" id="connectTo">
                 <option value='ENV_0'>ENV0</option>
                 <option value='DEST_0'>MASTER</option>
-                <option value='FILTER_0'>LOWPASS0</option>
+                <option value='FILTER_0'>FILTER0</option>
               </select>
 	    </div>
 	    <div class="modal-footer">

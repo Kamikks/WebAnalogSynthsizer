@@ -5,12 +5,15 @@ function EnvCard(parent, name, color, envCard) {
   this.name = name;
   this.ctrls = new Object();
   this.nextCard = [];
+  this.prev = null;
+  this.closeBtn = null;
 
   if(envCard !== null) {
     this.name = envCard.name;
     this.card = envCard.card;
     this.ctrls = envCard.ctrls;
-    console.log(this.ctrls);
+    //console.log(this.ctrls);
+    this.closeBtn = this.card.childNodes[1].childNodes[1];
   } else {
     this.card = document.createElement('div');
     this.card.classList.add("card");
@@ -32,6 +35,7 @@ function EnvCard(parent, name, color, envCard) {
     this.card.appendChild(cardBody);
     var innerRow = document.createElement('div');
     innerRow.classList.add("row");
+    innerRow.classList.add("row-extend");
     cardBody.appendChild(innerRow);
 
     var colEnv = new Object(); 
@@ -51,53 +55,61 @@ function EnvCard(parent, name, color, envCard) {
     // Define EventListener
     // TODO: integrate definition of each card
     var _this = this;
+    var insertTo = document.createElement('div')
     this.card.addEventListener('dragstart', function(e) {
       this.style.opacity = '0.4';
-      _tmpDrgSrc = _this;
+      _tmpDrgSrc = this;
       e.dataTransfer.effectAllowed = 'move';
     }, false);
-    this.card.addEventListener('dragenter', function() {
-      this.classList.add('dragenter');
+    this.card.addEventListener('dragenter', function(e) {
+      if(this != _tmpDrgSrc) {
+	this.parentNode.insertBefore(insertTo, this);
+	insertTo.classList.add('dragenter');
+      }
     }, false);
-    this.card.addEventListener('dragleave', function() {
+    insertTo.addEventListener('dragleave', function() {
       this.classList.remove('dragenter');
+      this.parentNode.removeChild(this);
     }, false);
-    this.card.addEventListener('dragover', function(e) {
+    insertTo.addEventListener('dragover', function(e) {
       if(e.preventDefault) {
 	e.preventDefault();
       }
       e.dataTransfer.dropEffect = 'move';
     }, false);
-    this.card.addEventListener('drop', function(e) {
+    insertTo.addEventListener('drop', function(e) {
       if(e.stopPropagation) {
 	e.stopPropagation();
       }
-      if(_tmpDrgSrc.card != this) {
-	parent.insertBefore(_tmpDrgSrc.card, this);
+      if(_tmpDrgSrc != _this.card) {
+	_this.card.parentNode.insertBefore(_tmpDrgSrc, _this.card);
+	_tmpDrgSrc.style.opacity = '1.0';
+	this.classList.remove('dragenter');
+	this.parentNode.removeChild(this);
       }
       return false;
     }, false);
-    this.card.addEventListener('dragend', function(e) {
-      this.style.opacity = '1.0';
-      this.classList.remove('dragenter');
-    }, false);
+
+
+    this.closeBtn.addEventListener('click', function() {
+      _this.disconnect();
+      _this.card.parentNode.removeChild(_this.card);
+    }); 
   }
-  this.closeBtn.addEventListener('click', function() {
-    _this.close();
-  });
 
 
   // Define Method
   this.envelope = null;
   this.startTime = 0;
 
-  this.close = function() {
-    this.card.parentNode.removeChild(this.card);
-  }
-
   this.connect = function(nextCard) {
     var i = this.nextCard.length;
+    nextCard.prev = this;
     this.nextCard[i] = nextCard;
+  }
+
+  this.disconnect = function() {
+    this.prev.nextCard.splice(this.prev.nextCard.indexOf(this.card), 1);
   }
 
   this.play = function(prev) {

@@ -3,6 +3,7 @@ function FilterCard(parent, name, type, color) {
   this.name = name;
   this.ctrls = new Object();
   this.nextCard = [];
+  this.prev = null;
 
   this.card = document.createElement('div');
   this.card.classList.add("card");
@@ -26,6 +27,7 @@ function FilterCard(parent, name, type, color) {
   this.card.appendChild(cardBody);
   var innerRow = document.createElement('div');
   innerRow.classList.add("row");
+  innerRow.classList.add("row-extend");
   cardBody.appendChild(innerRow);
 
   var colFreq = document.createElement('div');
@@ -34,7 +36,6 @@ function FilterCard(parent, name, type, color) {
   innerRow.appendChild(colFreq);
   this.ctrls['FREQUENCY'] = new Knob(colFreq, 'Frequency', name + '_Frequency', LARGE, color)
   this.ctrls['FREQUENCY'].draw(200);
-  //console.log(key[i-1]);
   var colQ = document.createElement('div');
   colQ.classList.add("col-md-6");
   colQ.classList.add("col-extend");
@@ -45,48 +46,55 @@ function FilterCard(parent, name, type, color) {
   // Define EventListener
   // TODO: integrate definition of each card
   var _this = this;
+  var insertTo = document.createElement('div')
   this.card.addEventListener('dragstart', function(e) {
     this.style.opacity = '0.4';
-    _tmpDrgSrc = _this;
+    _tmpDrgSrc = this;
     e.dataTransfer.effectAllowed = 'move';
   }, false);
-  this.card.addEventListener('dragenter', function() {
-    this.classList.add('dragenter');
+  this.card.addEventListener('dragenter', function(e) {
+    if(this != _tmpDrgSrc) {
+      this.parentNode.insertBefore(insertTo, this);
+      insertTo.classList.add('dragenter');
+    }
   }, false);
-  this.card.addEventListener('dragleave', function() {
+  insertTo.addEventListener('dragleave', function() {
     this.classList.remove('dragenter');
+    this.parentNode.removeChild(this);
   }, false);
-  this.card.addEventListener('dragover', function(e) {
+  insertTo.addEventListener('dragover', function(e) {
     if(e.preventDefault) {
       e.preventDefault();
     }
     e.dataTransfer.dropEffect = 'move';
   }, false);
-  this.card.addEventListener('drop', function(e) {
+  insertTo.addEventListener('drop', function(e) {
     if(e.stopPropagation) {
       e.stopPropagation();
     }
-    if(_tmpDrgSrc.card != this) {
-      parent.insertBefore(_tmpDrgSrc.card, this);
+    if(_tmpDrgSrc != _this.card) {
+      _this.card.parentNode.insertBefore(_tmpDrgSrc, _this.card);
+      _tmpDrgSrc.style.opacity = '1.0';
+      this.classList.remove('dragenter');
+      this.parentNode.removeChild(this);
     }
     return false;
   }, false);
-  this.card.addEventListener('dragend', function(e) {
-    this.style.opacity = '1.0';
-    this.classList.remove('dragenter');
-  }, false);  
+
 
   this.closeBtn.addEventListener('click', function() {
-    _this.close();
+    _this.card.parentNode.removeChild(_this.card);
+    _this.disconnect();
   });
+
 
 
   this.filter = null;
 
   // Define method
 
-  this.close = function() {
-    this.card.parentNode.removeChild(this.card);
+  this.disconnect = function() {
+    this.prev.nextCard.splice(this.prev.nextCard.indexOf(this.card), 1);
   }
 
   this.connect = function(nextCard) {
