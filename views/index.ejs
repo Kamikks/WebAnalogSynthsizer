@@ -6,10 +6,14 @@
     <script src="/components/Chart.min.js" type="text/javascript"></script>
     <link rel="import" href="/components/controls.html">
     <script type="text/javascript" src="/components/polymer.js"></script>
-    <script type="text/javascript" src="/components/jquery/jquery.min.js" defer="defer"></script>
-    <script type="text/javascript" src="/components/bootstrap/js/bootstrap.min.js" defer="defer"></script>
+    <link rel='stylesheet' href='/components/jquery-ui/jquery-ui.min.css' />
+    <script type="text/javascript" src="/components/jquery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/components/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascripts/components/define.js"></script>
     <script type="text/javascript" src="/javascripts/components/knob.js"></script>
+    <script type="text/javascript" src="/javascripts/models/knob_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/card_model.js"></script>
     <script type="text/javascript" src="/javascripts/components/card.js"></script>
     <script type="text/javascript" src="/javascripts/components/osc_card.js"></script>
     <script type="text/javascript" src="/javascripts/components/env_card.js"></script>
@@ -18,7 +22,7 @@
     <script type="text/javascript" src="/javascripts/components/keyboard_card.js"></script>
     <script type="text/javascript" src="/javascripts/components/dest_card.js"></script>
     <script type="text/javascript" src="/javascripts/load_dialog.js"></script>
-    <script type="text/javascript" src="/javascripts/main.js" defer="defer"></script>
+    <script type="text/javascript" src="/javascripts/main.js"></script>
     <link rel='stylesheet' href='/components/bootstrap/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
@@ -26,6 +30,23 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container" id="logo">SOUND DECK</div>
     </header>
+    <div id="sendto-dialog" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+	  <div class="modal-body">
+            <select class="form-control" id="connectTo">
+              <option value='ENV_0'>ENV0</option>
+              <option value='DEST_0'>MASTER</option>
+              <option value='FILTER_0'>FILTER0</option>
+            </select>
+          </div>
+	  <div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    <button type="submit" class="btn btn-primary">Select</button>
+	  </div>
+        </div>
+      </div>
+    </div>
     <div style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
@@ -55,11 +76,6 @@
                   <input type="radio" value="keyboard">Keyboard</input>
                 </label>
               </div>
-              <select class="form-control" id="connectTo">
-                <option value='ENV_0'>ENV0</option>
-                <option value='DEST_0'>MASTER</option>
-                <option value='FILTER_0'>FILTER0</option>
-              </select>
 	    </div>
 	    <div class="modal-footer">
 	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

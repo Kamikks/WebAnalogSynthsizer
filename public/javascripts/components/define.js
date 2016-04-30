@@ -1,4 +1,9 @@
 var context = new window.AudioContext();
+var _tmpDrgSrc = null;
+osc = [];
+filter = [];
+dest = null;
+env = [];
 
 const LARGE = 1;
 const MIDDLE = 2;
@@ -15,4 +20,3 @@ const HIGHSHELF = 'highshelf';
 const PEACKING = 'peaking';
 const NOTCH = 'notch';
 
-var _tmpDrgSrc = null;

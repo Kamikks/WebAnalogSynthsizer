@@ -10,7 +10,6 @@
     "express": "~4.13.1",
     "bootstrap": "latest",
     "less-middleware": "latest",
-    "chart.js": "latest",
-    "jquery": "latest"
+    "chart.js": "latest"
   }
 }

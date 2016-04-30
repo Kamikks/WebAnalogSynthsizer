@@ -56,6 +56,8 @@ function Knob(parent, label, id, size, color) {
     });
 
     window.addEventListener("mousemove", function(e) {
+ //     console.log("mousemove");
+//      console.log(_this);
       if(_this.turning) {
 	_this.draw((originY - e.clientY)*2 + _currentValue);
 	e.preventDefault();
