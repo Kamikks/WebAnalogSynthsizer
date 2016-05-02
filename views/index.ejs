@@ -10,18 +10,22 @@
     <script type="text/javascript" src="/components/jquery/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="/components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/components/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/javascripts/components/define.js"></script>
-    <script type="text/javascript" src="/javascripts/components/knob.js"></script>
-    <script type="text/javascript" src="/javascripts/models/knob_model.js"></script>
-    <script type="text/javascript" src="/javascripts/models/card_model.js"></script>
-    <script type="text/javascript" src="/javascripts/components/card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/osc_card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/env_card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/filter_card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/graphic_env_card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/keyboard_card.js"></script>
-    <script type="text/javascript" src="/javascripts/components/dest_card.js"></script>
-    <script type="text/javascript" src="/javascripts/load_dialog.js"></script>
+    <script type="text/javascript" src="/javascripts/lib/define.js"></script>
+    <script type="text/javascript" src="/javascripts/views/ctrls/knob_view.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/ctrls/knob_controller.js"></script>
+    <script type="text/javascript" src="/javascripts/models/ctrls/knob_model.js"></script>
+    <script type="text/javascript" src="/javascripts/views/ctrls/key_view.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/ctrls/key_controller.js"></script>
+    <script type="text/javascript" src="/javascripts/models/ctrls/key_model.js"></script>
+    <script type="text/javascript" src="/javascripts/views/proto_card_view.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/proto_card_controller.js"></script>
+    <script type="text/javascript" src="/javascripts/models/proto_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/adsr_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/dest_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/osc_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/key_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/views/add_card_view.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/add_card_controller.js"></script>
     <script type="text/javascript" src="/javascripts/main.js"></script>
     <link rel='stylesheet' href='/components/bootstrap/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -30,23 +34,6 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container" id="logo">SOUND DECK</div>
     </header>
-    <div id="sendto-dialog" class="modal fade" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-	  <div class="modal-body">
-            <select class="form-control" id="connectTo">
-              <option value='ENV_0'>ENV0</option>
-              <option value='DEST_0'>MASTER</option>
-              <option value='FILTER_0'>FILTER0</option>
-            </select>
-          </div>
-	  <div class="modal-footer">
-	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	    <button type="submit" class="btn btn-primary">Select</button>
-	  </div>
-        </div>
-      </div>
-    </div>
     <div style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog">

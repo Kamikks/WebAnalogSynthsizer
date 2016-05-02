@@ -99,8 +99,25 @@ ul {
   border-radius: 10px;
 }
 
-.close-btn {
+.btn-extend {
   float: right;
   margin: 3px;
   border: 1px solid #aaaaaa;
+}
+
+.dropdown-extend {
+  overflow: visible;
+  float: right;
+}
+
+.btn-sendto-select {
+  margin: 2px;
+}
+
+.body-sendto {
+  transition: all 1.5s ease;
+}
+
+.bg-sendto {
+  background-color: #333;
 }
