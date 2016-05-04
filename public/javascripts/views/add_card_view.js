@@ -1,36 +1,54 @@
 //Views
-//$('<div>').addClass('modal fade')
-//          .attr('id', 'myModal')
-//          .attr('tabindex', '-1')
-//          .attr('role', 'dialog')
-//          .append($('<div>')
-//                    .addClass('modal-dialog')
-//                    .attr('role', 'document')
-//                    .append($('<div>')
-//                              .addClass('modal-content')
-//                              .append($('<div>')
-//                                        .addClass('modal-header')
-//                                        .append($('<h4>')
-//                                                  .addClass('modal-title')
-//                                                  .attr('id', 'modal-label')
-//                                                  .html('Add Card')
-//                                        )
-//                              )
-//                              .append($('<div>')
-//                                        .addClass('modal-body')
-//                                        .append($('<div>')
-//                                                   .addClass('btn-group-vertical')
-//                                                   .attr('id', 'cardSelector')
-//                                                   .attr('data-toggle', 'buttons')
-//                                                   .append($('<label>')
-//                                                              .addClass('btn btn-primary active')
-//                                                              .append('<
+function createAddCardView() {
+  $("#backPanel").append($('<div>')
+                            .attr('id', 'addCardView')
+                            .addClass('add-card-view')
+                            .css('display', 'none')
+                 );
+
+  var cardList = ["sawtooth", "square", "sine", "envelope", "lowpass", "keyboard"];
+  $.each(cardList, function(i, card) {
+    $("#addCardView").append($('<a>')
+               .val(card)
+               .attr('href', '#')
+               .append($('<i>')
+                           .addClass("fa fa-bars fa-lg")
+                           .text(card)
+               )
+               .click(function(e) {
+                 addCard($(e.currentTarget).val());
+                 // switchAddCardView() must be called from model?
+                 switchAddCardView();
+               }) 
+    )
+  });
+}
+
+function switchAddCardView() {
+  var decks = ["#deck1", "#deck2", "#deck3"];
+  if($("#addCardView")[0] == null) {
+    createAddCardView();
+    $.each(decks, function(i, deck) {
+      $(deck).animate({height: 'hide', opacity: 'hide'}, 'slow', function() {
+        $(deck).css('display', 'none');
+      });
+    });
+    $("#addCardView").animate({height: 'show', opacity: 'show'}, 'slow', function() {
+      $("#addCardView").css('display', 'block');
+    }); 
+  } else {
+    $("#addCardView").remove();
+    $.each(decks, function(i, deck) {
+      $(deck).animate({height: 'show', opacity: 'show'}, 'slow', function() {
+        $(deck).css('display', 'block');
+      });
+    });
+  }
+}
+
 $(function() {
-  $("#myModal").on('click', '.modal-footer .btn-primary', function() {
-    console.log("submit");
-    $("#myModal").modal("hide");
-    selected = $("input[name=cardSelector]:checked").val();
-    addCard(selected);
+  $("#addCard").click(function() {
+    switchAddCardView();
   });
 });
 

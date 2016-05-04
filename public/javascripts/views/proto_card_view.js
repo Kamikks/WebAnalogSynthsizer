@@ -1,21 +1,14 @@
 // View
-function updateCards() {
-  // update dropdown list
-  // add new entry to "connect to"  option
-//  $.each(ProtoCardModel.list, function(i, obj) {
-//    var dropdownMenu = $("#"+obj.id).find(".dropdown-menu")
-//    $.each(dropdownMenu.children, function(i, child) {
-//      child.remove();
-//    });
-//    $.each(ProtoCardModel.list, function(j, obj) {
-//      dropdownMenu.append($('<li>')
-//                              .attr('role', 'presentation')
-//                              .append($('<a>')
-//                                          .html(obj.name)
-//                              )
-//                         );
-//    });
-//  });
+function refreshCards() {
+  var deck = ["deck1", "deck2", "deck3"];
+  for(var i=0; i<deck.length; i++) {
+    $.each($("#" + deck[i]).children("div"), function(i, card) {
+      $(card).remove();
+    });
+  }
+  $.each(ProtoCardModel.list, function(i, obj) {
+    updateCard(obj.id);
+  });
 }
 
 function updateCard(id) {
@@ -54,37 +47,30 @@ function updateCard(id) {
                                              .html(obj.name)
                                              .append($('<button>')
                                                        .attr('type', 'button')
-                                                       .addClass('btn btn-default btn-extend')
+                                                       .attr('title', 'Delete this Card')
+                                                       .addClass('btn btn-default btn-extend close-btn')
                                                        .click(function(e) {
                                                          onCardClose($(e.currentTarget).parents('.card')[0].id);
                                                        })
+                                                       //.append($('<i>')
+                                                       //            .addClass('fa fa-power-off')
+                                                       //) 
                                              )
-                                             .append($('<div>')
-                                                       .addClass('dropdown dropdown-extend')
-                                                       .append($('<button>')
-                                                                 .attr('type', 'button')
-                                                                 .addClass('btn btn-default dropdown-toggle btn-extend')
-                                                                 .attr('data-toggle', 'dropdown')
-                                                                 .click(function(e) {
-                                                                   onAccordion(e);
-                                                                 })
-                                                       )
-//                                                         .append($('<ul>')
-//                                                                   .addClass('dropdown-menu')
-//                                                                   .attr('role', 'menu')
-//                                                                   .append($('<li>')
-//                                                                             .attr('role', 'presentation')
-//                                                                             .append($('<a>')
-//                                                                                        .html("test")
-//                                                                             )
-//                                                                   )
-//                                                         )
+                                             .append($('<button>')
+                                                       .attr('type', 'button')
+                                                       .attr('title', 'Minimize')
+                                                       .addClass('btn btn-default btn-extend')
+                                                       .attr('data-toggle', 'dropdown')
+                                                       .click(function(e) {
+                                                         onAccordion(e);
+                                                       })
                                              )
                                              .append($('<button>')
                                                        .attr('type', 'button')
                                                        .addClass('btn btn-default btn-extend')
+                                                       .attr('title', 'Connect Card')
                                                        .click(function(e) {
-                                                         onSwitchSendtoSelector(e);
+                                                         switchSendtoSelectorView(e);
                                                        })
                                              )
                                  )
@@ -107,40 +93,46 @@ function updateCard(id) {
       case KEY_CTRL:
         updateKey(ctrl.id);
         break;
+      case MIDI_CTRL:
+        updateMidiselector(ctrl.id); 
+        break;
     } 
   });
 }
 
-function switchToSelector(id) {
+function createSendtoSelectorView(id) {
   // TODO if this is key card, don't display selector
+  var obj = ProtoCardModel.findById($("#"+id)[0].id);
   var cardBody = $("#"+id).find(".card-body");
-  cardBody.append($('<div>')
-                      .addClass('btn-group body-sendto')
-                      .attr('data-toggle', 'buttons')
-                      .on('DOMNodeInserted', function(e) {
-                        var target = $(e.target);
-                        setTimeout( function() {
-                          target.addClass('bg-sendto');
-                        }, 10);
-                      })
-                 );
-  var btnGroup = cardBody.children(".btn-group");
-  $.each(ProtoCardModel.list, function(i, obj) {
-    if(obj.type != KEY && obj.id != id) {
-      btnGroup.append($('<label>')
-		  .addClass('btn btn-primary btn-sendto-select')
-		  .html(obj.name)
-                  .click(function(e) {
-                    onSelectSendto(e);
-                  })
-		  .append($('<input>')
-			      .attr('type', 'radio')
-			      .attr('name', 'sendtoSelector')
-			      .val(obj.name)
-		  )
-      );
-    }
-  });
+  var sendtoSelector = $('<div>').addClass('sendto-selector-view')
+                           .css('display', 'none');
+  // keyboard is always connected to all osc card. 
+  if(obj.type != KEY && obj.type != DEST) {
+    $.each(ProtoCardModel.list, function(i, target) {
+      if(target.type != KEY && target.id != id) {
+        sendtoSelector.append($('<a>')
+                    .val(target.name)
+                    .click(function(e) {
+                      sendtoSelect(obj.id, $(e.currentTarget).val());
+                      switchSendtoSelectorView(e);
+                    })
+  		    .append($('<i>')
+                              .addClass("fa fa-sticky-note-o")
+  			      .text(target.name)
+  		    )
+                );
+      }
+    });
+    $.each(sendtoSelector.find("i"), function(i, label) {
+      $.each(obj.next, function(j, next) {
+        if(next.name == $(label).text()) {
+          $(label).removeClass("fa-sticky-note-o");
+          $(label).addClass("fa-arrow-right active");
+        }
+      }); 
+    });
+  }
+  cardBody.append(sendtoSelector);
 }
 
 var _tmpDrgId = null
@@ -180,20 +172,23 @@ function onDrop(e) {
 
 function onAccordion(e) {
   var cardBody = $(e.currentTarget).parents(".card").find(".card-body");
-  if(cardBody.children(".row")[0]) {
-    cardBody.children().remove();
-  } else {
-    updateCard($(e.currentTarget).parents(".card")[0].id);
-  }
+  cardBody.animate({height: 'toggle', opacity: 'toggle'}, 'slow');
 }
 
-function onSwitchSendtoSelector(e) {
+function switchSendtoSelectorView(e) {
   var cardBody = $(e.currentTarget).parents(".card").find(".card-body");
-  if(cardBody.children(".row")[0]) {
-    cardBody.children().remove();
-    switchToSelector($(e.currentTarget).parents(".card")[0].id);
+  if(cardBody.children(".sendto-selector-view")[0] == null) {
+    createSendtoSelectorView($(e.currentTarget).parents(".card")[0].id);
+    cardBody.children(".row").animate({width: 'hide', height: 'hide', opacity: 'hide'}, 'slow', function() {
+      cardBody.children(".row").css('display', 'none');
+    });
+    cardBody.children(".sendto-selector-view").animate({width: 'show', height: 'show', opacity: 'show'}, 'slow', function() {
+      cardBody.children(".sendto-selector-view").css('display', 'block');
+    });
   } else {
-    cardBody.children().remove();
-    updateCard($(e.currentTarget).parents(".card")[0].id);
+    cardBody.children(".sendto-selector-view").remove();
+    cardBody.children(".row").animate({width: 'show', height: 'show', opacity: 'show'}, 'slow', function() {
+      cardBody.children(".row").css('display', 'block');
+    });
   }
 }

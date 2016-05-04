@@ -12,9 +12,11 @@ const SINE = 'sine';
 const SQUARE = 'square';
 const KEY = 'keyboard';
 const ADSR = 'adsr';
-const KEYC = "261.6";
+const DEST = 'dest';
+const KEYC = "8.2";
 const KNOB_CTRL = "KNOB_CTRL";
 const KEY_CTRL = "KEY_CTRL";
+const MIDI_CTRL = "MIDI_CTRL";
 
 const LOWPASS = 'lowpass';
 const HIGHPASS = 'highpass';

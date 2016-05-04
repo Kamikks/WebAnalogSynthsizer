@@ -6,9 +6,9 @@ function updateKnobs() {
 function updateKnob(id) {
   var obj = KnobModel.findById(id);
   if (obj.size == LARGE) {
-    var w = 128, h = 64; 
+    var w = 150, h = 75; 
   } else {
-    var w = 60, h = 30;
+    var w = 90, h = 45;
   }
 
   if(obj) {
@@ -39,18 +39,18 @@ function updateKnob(id) {
     } 
     // update elem 
     var ctx = $("#"+id)[0].getContext('2d'); 
-    ctx.lineWidth = 30;
+    ctx.lineWidth = 40;
     ctx.strokeStyle = '#ddd';
     ctx.beginPath();
-    ctx.arc(150, 80, 30, 60 * Math.PI / 180, 120 * Math.PI / 180, true);
+    ctx.arc(150, 80, 40, 60 * Math.PI / 180, 120 * Math.PI / 180, true);
     ctx.stroke();
 
     if(obj.value <= 120) { obj.value = 120; }
     if(obj.value >= 420) { obj.value = 420; }
-    ctx.lineWidth = 29;
+    ctx.lineWidth = 39;
     ctx.strokeStyle = obj.color;
     ctx.beginPath();
-    ctx.arc(150, 80, 30, obj.value * Math.PI / 180, 120 * Math.PI / 180, true);
+    ctx.arc(150, 80, 40, obj.value * Math.PI / 180, 120 * Math.PI / 180, true);
     ctx.stroke();
   }
 }

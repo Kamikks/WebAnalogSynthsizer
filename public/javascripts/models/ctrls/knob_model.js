@@ -26,6 +26,10 @@ KnobModel.create = function(params) {
   return obj;
 }
 
+KnobModel.clear = function() {
+  KnobModel.list = [];
+}
+
 KnobModel.remove = function(id) {
   KnobModel.list = $.grep(KnobModel.list, function(obj) {
                      return id != obj.id;

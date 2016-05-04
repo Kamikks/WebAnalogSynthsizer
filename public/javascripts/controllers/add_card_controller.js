@@ -29,7 +29,20 @@ addCard = function(selected) {
     case "lowpass":
     case "highpass":
     case "bandpass":
-      //new FilterCard({deck: deck3, name: 'FILTER' + filter_id, type: LOWPASS, color: '#87da1a'});
+      new FilterCardModel({name: 'FILTER', type: LOWPASS, color: '#87da1a'});
+      break;
+    case "keyboard":
+      if(ProtoCardModel.findByType(KEY).length > 0) { 
+        // only one KeyCardModel can be added.
+        break; 
+      }
+      var key = new KeyCardModel({name: 'KEYBOARD', color: '#123125'});
+      var osc = [SAW, SINE, SQUARE];
+      $.each(osc, function(i, type) {
+        $.each(ProtoCardModel.findByType(type), function(j, sendTo) {
+          key.connect(sendTo);
+        });
+      }); 
       break;
   }
 };

@@ -1,9 +1,10 @@
 // Model
 function DestCardModel(params) {
   params.deckId = 'deck3';
+  params.type = DEST;
   ProtoCardModel.call(this, params);
   Object.setPrototypeOf(DestCardModel.prototype, ProtoCardModel.prototype);
-  this.addKnob({name: 'MASTER', id: this.name + '_MASTER', size: LARGE, value: 400, color: '#233433'});
+  this.addKnob({name: 'MASTER', id: this.name + '_MASTER', size: LARGE, value: 400, color: this.color});
 }
 
 DestCardModel.prototype = {

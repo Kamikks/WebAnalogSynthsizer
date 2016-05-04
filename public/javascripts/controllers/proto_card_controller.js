@@ -1,14 +1,16 @@
 // Controller
 function onCardClose(id) {
   var obj = ProtoCardModel.findById(id);
-  obj.disconnect({}); 
-  // delete from ProtoCardModel.list
-  ProtoCardModel.remove(obj.id);
+  if(obj.type != DEST) {
+    obj.disconnect({}); 
+    // delete from ProtoCardModel.list
+    ProtoCardModel.remove(obj.id);
+  }
 }
 
-function onSelectSendto(e) {
-  var sendFrom = ProtoCardModel.findById($(e.currentTarget).parents(".card")[0].id);
-  var sendTo = ProtoCardModel.findById($(e.currentTarget).children("input").val());
+function sendtoSelect(sendfromId, sendtoId) {
+  var sendFrom = ProtoCardModel.findById(sendfromId);
+  var sendTo = ProtoCardModel.findById(sendtoId);
   if(sendTo.type == ADSR && sendTo.prev.length > 0) {
     // copy sendTo
     //console.log(sendTo);

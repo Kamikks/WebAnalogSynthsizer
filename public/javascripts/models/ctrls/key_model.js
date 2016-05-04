@@ -34,6 +34,10 @@ KeyModel.remove= function(id) {
     updateKeys();
 }
 
+KeyModel.clear = function() {
+  KeyModel.list = [];
+}
+
 KeyModel.findById = function(id) {
     return $.grep(KeyModel.list, function(obj) {
              return id == obj.id;

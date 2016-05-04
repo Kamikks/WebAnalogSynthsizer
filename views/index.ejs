@@ -7,6 +7,7 @@
     <link rel="import" href="/components/controls.html">
     <script type="text/javascript" src="/components/polymer.js"></script>
     <link rel='stylesheet' href='/components/jquery-ui/jquery-ui.min.css' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/components/jquery/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="/components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/components/bootstrap/js/bootstrap.min.js"></script>
@@ -23,9 +24,16 @@
     <script type="text/javascript" src="/javascripts/models/adsr_card_model.js"></script>
     <script type="text/javascript" src="/javascripts/models/dest_card_model.js"></script>
     <script type="text/javascript" src="/javascripts/models/osc_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/filter_card_model.js"></script>
+    <script type="text/javascript" src="/javascripts/models/ctrls/midiselector_model.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/ctrls/midiselector_controller.js"></script>
+    <script type="text/javascript" src="/javascripts/views/ctrls/midiselector_view.js"></script>
+    <script type="text/javascript" src="/javascripts/models/midiin_card_model.js"></script>
     <script type="text/javascript" src="/javascripts/models/key_card_model.js"></script>
-    <script type="text/javascript" src="/javascripts/views/add_card_view.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/add_card_controller.js"></script>
+    <script type="text/javascript" src="/javascripts/views/add_card_view.js"></script>
+    <script type="text/javascript" src="/javascripts/views/init_deck_view.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/init_deck_controller.js"></script>
     <script type="text/javascript" src="/javascripts/main.js"></script>
     <link rel='stylesheet' href='/components/bootstrap/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -35,48 +43,19 @@
       <div class="container" id="logo">SOUND DECK</div>
     </header>
     <div style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-	  <div class="modal-content">
-	    <div class="modal-header">
-	      <h4 class="modal-title" id="modal-label">Add Card</h4>
-	    </div>
-	    <div class="modal-body">
-              <div class="btn-group-vertical" id="cardSelector" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                  <input type="radio" name="cardSelector" value="sawtooth">Sawtooth Oscillator</input>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="cardSelector" value="square">Square Oscillator</input>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="cardSelector" value="sine">Sine Oscillator</input>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="cardSelector" value="envelope">Envelope Generator</input>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="cardSelector" value="lowpass">Lowpas Filter</input>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" value="keyboard">Keyboard</input>
-                </label>
-              </div>
-	    </div>
-	    <div class="modal-footer">
-	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      <button type="submit" class="btn btn-primary">Add</button>
-	    </div>
-	  </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-primary">Export</button>
+      <button type="button" class="btn btn-primary" id="initDeck">
+        <i class="fa fa-file-text-o fa-lg"></i>
+      </button>
+      <button type="button" class="btn btn-primary" id="addCard">
+        <i class="fa fa-plus-square-o fa-lg"></i>
+      </button>
+      <button type="button" class="btn btn-primary">
+        <i class="fa fa-floppy-o fa-lg"></i>
+      </button>
     </div>
     <div class ="jumbotron">
       <div class = "container">
-        <div class="row">
+        <div class="row" id="backPanel">
           <div class="col-md-4" id="deck1">
           </div>
           <div class="col-md-4" id="deck2">
