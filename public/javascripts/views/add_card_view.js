@@ -6,8 +6,7 @@ function createAddCardView() {
                             .css('display', 'none')
                  );
 
-  var cardList = ["sawtooth", "square", "sine", "envelope", "lowpass", "keyboard"];
-  $.each(cardList, function(i, card) {
+  $.each(CARDLIST, function(i, card) {
     $("#addCardView").append($('<a>')
                .val(card)
                .attr('href', '#')

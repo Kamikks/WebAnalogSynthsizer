@@ -29,22 +29,16 @@ function updateCard(id) {
                                  .on('dragstart', function(e) {
                                    onDragStart(e); 
                                  })
-                                 .on('dragenter', function(e) {
-                                   onDragEnter(e);
-                                 })
-                                 .on('dragleave', function(e) {
-                                   onDragLeave(e);
-                                 })
-                                 .on('dragover', function(e) {
-                                   onDragOver(e);
-                                 })
-                                 .on('drop', function(e) {
-                                   onDrop(e);
+                                 .on('dragend', function(e) {
+                                   onDragEnd(e);
                                  })
                                  .append($('<div>')
                                              .addClass('card-header')
                                              .css('border-left', '10px solid ' + obj.color)
                                              .html(obj.name)
+                                             .on('dragenter', function(e) {
+                                               onDragEnter(e);
+                                             })
                                              .append($('<button>')
                                                        .attr('type', 'button')
                                                        .attr('title', 'Delete this Card')
@@ -125,7 +119,7 @@ function createSendtoSelectorView(id) {
     });
     $.each(sendtoSelector.find("i"), function(i, label) {
       $.each(obj.next, function(j, next) {
-        if(next.name == $(label).text()) {
+        if(next.id == $(label).text()) {
           $(label).removeClass("fa-sticky-note-o");
           $(label).addClass("fa-arrow-right active");
         }
@@ -139,17 +133,40 @@ var _tmpDrgId = null
 function onDragStart(e) {
   $(e.currentTarget).css('opacity', '0.4');
   e.originalEvent.dataTransfer.effectAllowed = 'move';
-  _tmpDrgId = e.currentTarget.id;
+  _tmpDrgId = $(e.currentTarget)[0].id;
+  console.log("onDragStart: " + _tmpDrgId);
 }
 
 function onDragEnter(e) {
-  if(_tmpDrgId != e.currentTargetId) {
-    $(e.currentTarget).addClass('dragenter');
+  var card = $(e.currentTarget).parents(".card");
+  if(_tmpDrgId != $(e.currentTarget).parents(".card")[0].id && $(".dragenter")[0] == null) {
+    console.log("onDragenter: " + $(e.currentTarget).parents(".card")[0].id + ", tmpDrgSrc: " + _tmpDrgId);
+    $(e.currentTarget).parents(".card").before($('<div>')
+                                  .addClass('dragenter')
+//                                  .css('display', 'none')
+                                  .on('dragleave', function(e) {
+                                    onDragLeave(e);
+                                  })
+                                  .on('dragover', function(e) {
+                                    onDragOver(e); 
+                                  })
+                                  .on('drop', function(e) {
+                                    onDrop(e);
+                                  })
+                             );
+//    $(".dragenter").animate({height: 'show', opacity: 'show'},
+//                             'slow',
+//                             function() {
+//                               $(".dragenter").css('display', 'block');
+//                             });
   }
 }
 
 function onDragLeave(e) {
   $(e.currentTarget).removeClass('dragenter');
+  $(e.currentTarget).animate({width: 'hide', height: 'hide', opacity: 'hide'}, 'slow', function() {
+                              $(e.currentTarget).remove();
+                            }); 
 }
 
 function onDragOver(e) {
@@ -163,11 +180,19 @@ function onDrop(e) {
   if(e.stopPropagation) {
     e.stopPropagation();
   }
+  console.log("onDrop: " + _tmpDrgId);
   if(_tmpDrgId != e.currentTarget.id) {
-    $(e.currentTarget).before($("#"+_tmpDrgId));
-    $(e.currentTarget).removeClass('dragenter');
-    $('#'+_tmpDrgId).css('opacity', '1.0');
+    $(e.currentTarget).after($("#"+_tmpDrgId));
   }
+  $(e.currentTarget).removeClass('dragenter');
+  $(e.currentTarget).remove();
+  $('#'+_tmpDrgId).css('opacity', '1.0');
+}
+
+function onDragEnd(e) {
+  console.log("onDragend: " + _tmpDrgId);
+  $(".dragenter").remove();
+  $('#'+_tmpDrgId).css('opacity', '1.0');
 }
 
 function onAccordion(e) {

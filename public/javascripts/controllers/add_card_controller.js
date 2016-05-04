@@ -1,42 +1,32 @@
 //Controller
 addCard = function(selected) {
   switch(selected) {
-    case "sawtooth":
-      var oscName = 'SAW';
-      var oscType = SAW;
-      break;
-    case "square":
-      var oscName = 'SQUARE';
-      var oscType = SQUARE;
-      break;
-    case "sine":
-      var oscName = 'SINE';
-      var oscType = SINE;
-      break;
-  }
-  switch(selected) {
-    case "sawtooth":
-    case "square":
-    case "sine":
-      var osc = new OscCardModel({name: oscName, type: oscType, color: '#477332'});
+    case SAW:
+    case SQUARE:
+    case SINE:
+      var osc = new OscCardModel({name: selected.toUpperCase(), type: selected, color: '#477332'});
       $.each(ProtoCardModel.findByType(KEY), function(i, obj) {
         obj.connect(osc);
       });
       break;
-    case "envelope":
-      new AdsrCardModel({name: 'ENV', color: '#123457'});
+    case ADSR:
+      new AdsrCardModel({name: selected.toUpperCase(), color: '#123457'});
       break;
-    case "lowpass":
-    case "highpass":
-    case "bandpass":
-      new FilterCardModel({name: 'FILTER', type: LOWPASS, color: '#87da1a'});
+    case LOWPASS:
+    case HIGHPASS:
+    case BANDPASS:
+    case LOWSHELF:
+    case HIGHSHELF:
+    case PEACKING:
+    case NOTCH:
+      new FilterCardModel({name: selected.toUpperCase(), type: selected, color: '#87da1a'});
       break;
-    case "keyboard":
+    case KEY:
       if(ProtoCardModel.findByType(KEY).length > 0) { 
         // only one KeyCardModel can be added.
         break; 
       }
-      var key = new KeyCardModel({name: 'KEYBOARD', color: '#123125'});
+      var key = new KeyCardModel({name: selected.toUppercase(), color: '#123125'});
       var osc = [SAW, SINE, SQUARE];
       $.each(osc, function(i, type) {
         $.each(ProtoCardModel.findByType(type), function(j, sendTo) {

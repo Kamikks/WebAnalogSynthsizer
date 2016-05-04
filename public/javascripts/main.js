@@ -10,10 +10,9 @@ onload = function() {
 
     saw = new OscCardModel({name: 'SAW', color: '#477332', type: SAW});
 
-    adsr = new AdsrCardModel({name: 'ENV', color: '#123457'});
+    adsr = new AdsrCardModel({name: 'ADSR', color: '#123457'});
     dest = new DestCardModel({name: 'MASTER', color: '#878888'});
     key = new KeyCardModel({name: 'KEYBOARD', color: '#ddd878'});
-//    midiin = new MidiinCardModel({name: "MIDI", color: '#234432'});
 
     key.connect(saw);
     saw.connect(adsr);

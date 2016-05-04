@@ -26,3 +26,7 @@ const HIGHSHELF = 'highshelf';
 const PEACKING = 'peaking';
 const NOTCH = 'notch';
 
+const CARDLIST = [SAW, SINE, SQUARE, 
+                  ADSR, LOWPASS,
+                  HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEACKING, NOTCH, 
+                  KEY]
