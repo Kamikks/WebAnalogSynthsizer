@@ -26,7 +26,7 @@ addCard = function(selected) {
         // only one KeyCardModel can be added.
         break; 
       }
-      var key = new KeyCardModel({name: selected.toUppercase(), color: '#123125'});
+      var key = new KeyCardModel({name: selected.toUpperCase(), color: '#123125'});
       var osc = [SAW, SINE, SQUARE];
       $.each(osc, function(i, type) {
         $.each(ProtoCardModel.findByType(type), function(j, sendTo) {
