@@ -103,7 +103,8 @@ function createSendtoSelectorView(id) {
   // keyboard is always connected to all osc card. 
   if(obj.type != KEY && obj.type != DEST) {
     $.each(ProtoCardModel.list, function(i, target) {
-      if(target.type != KEY && target.id != id) {
+      if(target.type != KEY && target.id != id && target.type != SAW &&
+         target.type != SQUARE && target.type != SINE) {
         sendtoSelector.append($('<a>')
                     .val(target.name)
                     .click(function(e) {

@@ -1,5 +1,5 @@
 $(function() {
   $("#initDeck").click(function() {
-    onInitDeck();
+    initDeck();
   });
 });

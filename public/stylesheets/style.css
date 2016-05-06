@@ -102,6 +102,7 @@ ul {
   float: right;
   margin: 3px;
   border: 1px solid #aaaaaa;
+  margin-left: 10px;
 }
 
 .close-btn {

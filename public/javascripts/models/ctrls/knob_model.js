@@ -54,13 +54,15 @@ KnobModel.updateView = function() {
   // TODO
 }
 
-KnobModel.prototype.changeValue = function(val) {
-  this.value = val;
-  // 値を変えてview通知
-  updateKnob(this.id);
+KnobModel.prototype = {
+  changeValue : function(val) {
+    this.value = val;
+    // 値を変えてview通知
+    updateKnob(this.id);
+  },
+
+  updateView: function() {
+  }
 }
 
-
-KnobModel.prototype.updateView = function() {
-}
 

@@ -1,4 +1,4 @@
-onInitDeck = function() {
+initDeck = function() {
   KnobModel.clear();
   KeyModel.clear();
   MidiselectorModel.clear();

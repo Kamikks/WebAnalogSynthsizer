@@ -1,6 +1,6 @@
 // Model
 function OscCardModel(params) {
-  params.deckId = 'deck1';
+  params.deckId = params.deckId || 'deck1';
   ProtoCardModel.call(this, params);
   Object.setPrototypeOf(OscCardModel.prototype, ProtoCardModel.prototype);
   this.addKnob({name: 'Send', id: this.name + '_SEND', size: LARGE, value: 270, color: this.color});

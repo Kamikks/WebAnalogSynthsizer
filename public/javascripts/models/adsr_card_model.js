@@ -5,11 +5,12 @@ function AdsrCardModel(params) {
     var copy = $.extend(true, {}, params.obj);
     copy.name = null;
     copy.prev = [];
+    copy.clone = [];
     obj.clone.push(copy);
     return copy;
   } else {
     params.type = ADSR;
-    params.deckId = 'deck2';
+    params.deckId = params.deckId || 'deck2';
     ProtoCardModel.call(this, params);
     Object.setPrototypeOf(AdsrCardModel.prototype, ProtoCardModel.prototype);
     this.addKnob({name: 'Attack Time', id: this.name + '_AttackTime', size: MIDDLE, value: 200, color: this.color});

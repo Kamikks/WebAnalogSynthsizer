@@ -2,8 +2,8 @@
 function ProtoCardModel(params) {
   // name and id is unique
   var num = ProtoCardModel.findByType(params.type).length;
-  this.name = params.name + num;
-  this.id = params.name + num;
+  this.name = params.id || params.name + num;
+  this.id = params.id || params.name + num;
   this.type = params.type; 
   this.ctrls = params.ctrls || new Object();
   this.prev = params.prev || [];
@@ -46,6 +46,66 @@ ProtoCardModel.findByType = function(type) {
 ProtoCardModel.updateView= function() {
   //TODO
 }
+
+//ProtoCardModel.saveObj = function() {
+//  var result = [];
+//  $.each(ProtoCardModel.list, function(i, obj) {
+//    result.push(obj.saveObj());
+//  });
+//  return result;
+//}
+
+//ProtoCardModel.loadObj = function(json) {
+//  var card = null;
+//  var objList = $.parseJSON(json);
+//  // create all object
+//  $.each(objList, function(i, obj) {
+//    switch(obj.type) {
+//      case SAW:
+//      case SQUARE:
+//      case SINE:
+//        card = new OscCardModel({id: obj.id, type: obj.type, color: obj.color, deckId: obj.deckId});
+//        $.each(obj.ctrls, function(i, ctrl) {
+//          card.ctrls[ctrl.key].value = ctrl.value;
+//        });
+//        break;
+//      case ADSR:
+//        card = new AdsrCardModel({id: obj.id, type: obj.type, color: obj.color, deckId: obj.deckId});
+//        $.each(obj.ctrls, function(i, ctrl) {
+//          card.ctrls[ctrl.key].value = ctrl.value;
+//        });
+//        break;
+//      case LOWPASS:
+//      case HIGHPASS:
+//      case BANDPASS:
+//      case LOWSHELF:
+//      case HIGHSHELF:
+//      case PEACKING:
+//      case NOTCH:
+//        card = new FilterCardModel({id: obj.id, type: obj.type, color: obj.color, deckId: obj.deckId});
+//        $.each(obj.ctrls, function(i, ctrl) {
+//          card.ctrls[ctrl.key].value = ctrl.value;
+//        });
+//        break;
+//      case KEY:
+//        card = new KeyCardModel({id: obj.id, type: obj.type, color: obj.color, deckId: obj.deckId});
+//        break;
+//    }
+//  }); 
+//  // connect
+//  // TODO merge to sendtoSelect() at proto_card_controller.js
+//  $.each(objList, function(i, obj) {
+//    $.each(obj.next, function(j, nextId) {
+//      var sendFrom = ProtoCardModel.findById(obj.id);
+//      var sendTo = ProtoCardModel.findById(nextId);
+//      if(sendTo.type == ADSR && sendTo.prev.length > 0) {
+//        sendTo = new AdsrCardModel({obj: sendTo});
+//      }
+//      sendFrom.disconnect({oneway: true});
+//      sendFrom.connect(sendTo);
+//    }); 
+//  });
+//}
 
 ProtoCardModel.prototype = {
   addKnob: function(params) {
@@ -110,5 +170,28 @@ ProtoCardModel.prototype = {
 
   updateView: function() {
     updateCard();
+  },
+
+  saveObj: function() {
+    var obj = {
+      id: this.id,
+      type: this.type,
+      color: this.color,
+      deckId: this.deckId,
+      clone: this.clone.length,
+      ctrls: [],
+      prev: [],
+      next: []
+    }
+    for(var k in this.ctrls) {
+      obj.ctrls.push({key: k, id: this.ctrls[k].id, value: this.ctrls[k].value || null});
+    }
+    $.each(this.prev, function(i, prev) {
+      obj.prev.push(prev.id); 
+    }); 
+    $.each(this.next, function(i, next) {
+      obj.next.push(next.id); 
+    }); 
+    return obj;
   }
 }

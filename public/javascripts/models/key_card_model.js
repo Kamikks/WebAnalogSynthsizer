@@ -1,7 +1,7 @@
 // Model
 function KeyCardModel(params) {
   params.type = KEY;
-  params.deckId = 'deck1';
+  params.deckId = params.deckId || 'deck1';
   ProtoCardModel.call(this, params);
   Object.setPrototypeOf(KeyCardModel.prototype, ProtoCardModel.prototype);
   this.addMidi({name: "MIDI", id: this.name + "_MIDI"});
