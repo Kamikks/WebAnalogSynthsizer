@@ -54,6 +54,7 @@ AdsrCardModel.prototype = {
   stop: function() {
     var currentTime = context.currentTime;
     this.audioNode.gain.cancelScheduledValues(currentTime);
+    console.log(this.audioNode.gain.value);
     this.audioNode.gain.setValueAtTime(this.audioNode.gain.value, currentTime);
     // releaseTime: 0 - 3[s]
     var releaseTime = (this.ctrls['Release'].value - 120) / 300;
