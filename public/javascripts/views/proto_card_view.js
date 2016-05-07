@@ -13,15 +13,15 @@ function refreshCards() {
 
 function updateCard(id) {
   var obj = ProtoCardModel.findById(id); 
-  if(obj == null) {
-    // delete view if exists
-    if($("#"+id)) {
-      $("#"+id).remove();
+  if($("#" + id)[0]) {
+    if(obj == null) {
+    // delete view if object is already deleted or object move to other deck.
+      $("#" + id).remove();
     } 
     return;
   }
   if($("#"+obj.id)[0] == null) {
-    // create new card element
+    // create new card element if there is no view
     $("#"+obj.deckId).append($('<div>')
                                  .addClass('card')
                                  .attr('id', obj.id)
@@ -46,9 +46,6 @@ function updateCard(id) {
                                                        .click(function(e) {
                                                          onCardClose($(e.currentTarget).parents('.card')[0].id);
                                                        })
-                                                       //.append($('<i>')
-                                                       //            .addClass('fa fa-power-off')
-                                                       //) 
                                              )
                                              .append($('<button>')
                                                        .attr('type', 'button')
@@ -188,6 +185,8 @@ function onDrop(e) {
   $(e.currentTarget).removeClass('dragenter');
   $(e.currentTarget).remove();
   $('#'+_tmpDrgId).css('opacity', '1.0');
+  // TODO
+  //  dropCard(_tmpDrgId, e.currentTarget.id);
 }
 
 function onDragEnd(e) {

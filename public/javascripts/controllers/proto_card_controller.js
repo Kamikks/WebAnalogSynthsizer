@@ -21,8 +21,7 @@ function sendtoSelect(sendfromId, sendtoId) {
   sendFrom.connect(sendTo);
 }
 
-function onConnect(e) {
+function dropCard(targetId, dropToId) {
   //TODO
-  var obj = ProtoCardModel.findById(e.currentTarget.id)
-  obj.connect(); 
 }
+

@@ -172,23 +172,24 @@ ProtoCardModel.prototype = {
     updateCard();
   },
 
-  saveObj: function() {
+  convertObj: function() {
     var obj = {
       id: this.id,
       type: this.type,
       color: this.color,
       deckId: this.deckId,
-      clone: this.clone.length,
+//      clone: this.clone.length,
       ctrls: [],
       prev: [],
       next: []
     }
     for(var k in this.ctrls) {
-      obj.ctrls.push({key: k, id: this.ctrls[k].id, value: this.ctrls[k].value || null});
+      //obj.ctrls.push({key: k, id: this.ctrls[k].id, value: this.ctrls[k].value || null});
+      obj.ctrls.push({key: k, value: this.ctrls[k].value || null});
     }
-    $.each(this.prev, function(i, prev) {
-      obj.prev.push(prev.id); 
-    }); 
+//    $.each(this.prev, function(i, prev) {
+//      obj.prev.push(prev.id); 
+//    }); 
     $.each(this.next, function(i, next) {
       obj.next.push(next.id); 
     }); 

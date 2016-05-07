@@ -1,9 +1,12 @@
 var saveDeck = function() {
   var result = [];
   $.each(ProtoCardModel.list, function(i, obj) {
-    result.push(obj.saveObj());
+    if(obj.type != DEST) {
+      var data = obj.convertObj();
+      result.push(data);
+    }
   });
-  return result;
+  return JSON.stringify(result);
 }
 
 var loadDeck = function(json) {

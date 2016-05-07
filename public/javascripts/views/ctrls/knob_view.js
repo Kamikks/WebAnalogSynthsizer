@@ -24,18 +24,27 @@ function updateKnob(id) {
 				 .width(w).height(h)
 				 .attr('id', id)
                                  .mousedown(function(e){
-                                   onMouseDown(e);
+                                   mousedownKnob(e);
+                                 })
+                                 .on('touchstart', function(e) {
+                                   touchstartKnob(e);
                                  })));
       $("#"+id).before($('<div>')
 		       .html(obj.name) 
 		       .css('font-size', 'smaller')
 		       .css('text-align', 'center'));
       $(window).mousemove(function(e){
-                  onMouseMove(e);
+                  mousemoveKnob(e);
                }) 
                .mouseup(function(e) {
-                  onMouseUp(e);
-                }); 
+                  mouseupKnob(e);
+               }) 
+               .on('touchmove', function(e) {
+                  touchmoveKnob(e);
+               })
+               .on('touchend', function(e) {
+                  touchendKnob(e);
+               });
     } 
     // update elem 
     var ctx = $("#"+id)[0].getContext('2d'); 
