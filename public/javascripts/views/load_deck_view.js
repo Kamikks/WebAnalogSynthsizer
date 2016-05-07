@@ -26,6 +26,7 @@ function createLoadDeckView() {
 function switchLoadDeckView() {
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#loadDeckView")[0] == null) {
+    if($("#addCardView")[0]) { $("#addCardView").remove() };
     createLoadDeckView();
     $.each(decks, function(i, deck) {
       $(deck).animate({height: 'hide', opacity: 'hide'}, 'slow', function() {
