@@ -20,7 +20,6 @@ function mousedownKey(e) {
   obj.changeValue(true, noteNum);
 }
 
-// TODO dragenter must down key 
 function mousemoveKey(e) {
   var obj = KeyModel.findById(e.currentTarget.id);
   var x = e.offsetX;

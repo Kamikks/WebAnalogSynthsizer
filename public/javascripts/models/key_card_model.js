@@ -7,24 +7,24 @@ function KeyCardModel(params) {
   this.addMidi({name: "MIDI", id: this.name + "_MIDI"});
   this.addKey({name: 'KEYBOARD', id: this.name + '_KEY', color: this.color, size: LARGE});
   this.keyonList = [];
-  this.maxPolyCount = 1;
+  this.maxPolyCount = 3;
 }
 
 KeyCardModel.prototype = {
   changeValue: function(keydown, noteNum) {
     if(keydown) {
       if(this.keyonList.length < this.maxPolyCount) {
-        var freq = KEYC * Math.pow(1.0595, noteNum);
-        console.log(noteNum);
+        //var freq = KEYC * Math.pow(1.0595, noteNum);
+        //console.log(noteNum);
         for(var i=0; i<this.next.length; i++) {
-          this.next[i].play(freq);
+          this.next[i].play(noteNum);
         }
         this.keyonList.push(noteNum);
       }
     } else {
       if(this.keyonList.length > 0 && this.keyonList.indexOf(noteNum) >= 0) {
         for(var i=0; i<this.next.length; i++) {
-          this.next[i].stop();
+          this.next[i].stop(noteNum);
         }
         this.keyonList.splice(this.keyonList.indexOf(noteNum), 1);
       }

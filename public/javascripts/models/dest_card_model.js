@@ -9,7 +9,7 @@ function DestCardModel(params) {
 
 DestCardModel.prototype = {
   play: function(prev) {
-    this.audioNode = context.createGain();
+    this.audioNode = this.audioNode || context.createGain();
     this.audioNode.gain.value = (this.ctrls['MASTER'].value - 120) / 300;
     prev.connect(this.audioNode);
     this.audioNode.connect(context.destination);

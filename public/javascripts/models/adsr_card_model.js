@@ -19,23 +19,26 @@ function AdsrCardModel(params) {
     this.addKnob({name: 'Sustain', id: this.name + '_Sustain', size: MIDDLE, value: 200, color: this.color});
     this.addKnob({name: 'Release', id: this.name + '_Release', size: MIDDLE, value: 200, color: this.color});
   } 
+  // OscCardModel and AdsrCardModel have this.audioNode for each note number.
+  this.audioNode = [];
+  for(var i = 48; i < 62; i++) {
+    this.audioNode[i] = context.createGain();
+  } 
 }
 
 
 AdsrCardModel.prototype = {
-  play: function(prev) {
+  play: function(prev, noteNum) {
     this.startTime = 0;
-    this.audioNode = context.createGain();
-    prev.connect(this.audioNode);
+    this.audioNode[noteNum] = this.audioNode[noteNum] || context.createGain();
+    prev.disconnect();
+    prev.connect(this.audioNode[noteNum]);
     for(var i = 0; i < this.next.length; i++) {
-      this.next[i].play(this.audioNode);
+      this.next[i].play(this.audioNode[noteNum]);
     }
     this.startTime = context.currentTime;
-    this.audioNode.gain.setValueAtTime(0, this.startTime);
-  },
+    this.audioNode[noteNum].gain.setValueAtTime(0, this.startTime);
 
-  postSend: function() {
-   // console.log("startTime: " + this.startTime);
     // TODO: create get currentValue method
     // attackTime: 0 - 3[s]
     var attackTime = this.startTime + parseFloat((this.ctrls['Attack Time'].value - 120) / 100);
@@ -45,19 +48,18 @@ AdsrCardModel.prototype = {
     // sustainLevel
     var sustainLevel = (this.ctrls['Sustain'].value - 120) / 300;
     //attack
-    this.audioNode.gain.linearRampToValueAtTime(decayLevel, attackTime);
+    this.audioNode[noteNum].gain.linearRampToValueAtTime(decayLevel, attackTime);
     //decay
-    this.audioNode.gain.setTargetAtTime(sustainLevel, attackTime, decayTime);
+    this.audioNode[noteNum].gain.setTargetAtTime(sustainLevel, attackTime, decayTime);
    // console.log("attackTime: " + attackTime + ", decayTime: " + decayTime + ", decayLevel: " + decayLevel + ", sustainLevel: " + sustainLevel);
   },
 
-  stop: function() {
+  stop: function(noteNum) {
     var currentTime = context.currentTime;
-    this.audioNode.gain.cancelScheduledValues(currentTime);
-    console.log(this.audioNode.gain.value);
-    this.audioNode.gain.setValueAtTime(this.audioNode.gain.value, currentTime);
+    this.audioNode[noteNum].gain.cancelScheduledValues(currentTime);
+    this.audioNode[noteNum].gain.setValueAtTime(this.audioNode[noteNum].gain.value, currentTime);
     // releaseTime: 0 - 3[s]
     var releaseTime = (this.ctrls['Release'].value - 120) / 300;
-    this.audioNode.gain.linearRampToValueAtTime(0, currentTime + releaseTime);
+    this.audioNode[noteNum].gain.linearRampToValueAtTime(0, currentTime + releaseTime);
   }
 }
