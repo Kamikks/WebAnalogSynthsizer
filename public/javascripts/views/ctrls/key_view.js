@@ -2,33 +2,34 @@
 function updateKeys() {
 }
 function updateKey(id) {
+  var supportTouch = 'ontouchend' in document;
   var obj = KeyModel.findById(id);
 
   if(obj) {
     if ($("#"+id)[0] == null) {
-//      $("#"+obj.cardId).find(".row").append($('<div>')
-//                                 .addClass('col-md-2')
-//                                 .addClass('col-extend')
-//                         .append($('<webaudio-keyboard>')
-//				 .attr('keys', 15) 
-//                                 .attr('id', obj.id)
-//                                 .on('change', function(e) {
-//                                   onChange(e);
-//                                 })));
       // create view
-      $("#" + obj.cardId).find(".row").append($('<canvas>')
-                                                  .attr('id', id)
-                                                  .mousedown(function(e) {
-                                                    e.preventDefault();
-                                                    onKeydown(e);
-                                                  })
-                                                  .on('mousemove', function(e) {
-                                                    onKeymove(e);
-                                                  })
-                                                  .mouseup(function(e) {
-                                                    onKeyup(e);
-                                                  })
-                                      );
+      //console.log("supportTouch: " + supportTouch);
+      if(supportTouch) {
+        $("#" + obj.cardId).find(".row").append($('<canvas>')
+                                                    .attr('id', id)
+                                                    .on('touchstart', function(e) {
+                                                      onTouchStartKey(e);
+                                                    })
+                                                    .on('touchend', function(e) {
+                                                      onTouchEndKey(e);
+                                                    })
+                                        );
+      } else {
+        $("#" + obj.cardId).find(".row").append($('<canvas>')
+                                                    .attr('id', id)
+                                                    .on('mousedown', function(e) {
+                                                      onMousedownKey(e);
+                                                    })
+                                                    .on('mouseup', function(e) {
+                                                      onMouseupKey(e);
+                                                    })
+                                        );
+      }
     } 
     // update view
     var ctx = $("#" + id)[0].getContext('2d');
@@ -57,5 +58,31 @@ function updateKey(id) {
     });
     ctx.stroke();
   }
+}
+
+function onMousedownKey(e) {
+  e.preventDefault();
+  mousedownKey(e);
+  $(e.currentTarget).on('mousemove', function(e) {
+    mousemoveKey(e);
+  });
+}
+
+function onMouseupKey(e) {
+  mouseupKey(e);
+  $(e.currentTarget).off('mousemove');
+}
+
+function onTouchStartKey(e) {
+  e.preventDefault();
+  touchstartKey(e);
+  $(e.currentTarget).on('touchmove', function(e) {
+    touchmoveKey(e);
+  });
+}
+
+function onTouchEndKey(e) {
+  touchendKey(e);
+  $(e.currentTarget).off('touchmove');
 }
 
