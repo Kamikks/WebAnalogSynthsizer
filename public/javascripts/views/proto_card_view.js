@@ -109,7 +109,6 @@ function createSendtoSelectorView(id) {
                       switchSendtoSelectorView(e);
                     })
   		    .append($('<i>')
-                              .addClass("fa fa-sticky-note-o")
   			      .text(target.name)
   		    )
                 );
@@ -118,8 +117,8 @@ function createSendtoSelectorView(id) {
     $.each(sendtoSelector.find("i"), function(i, label) {
       $.each(obj.next, function(j, next) {
         if(next.id == $(label).text()) {
-          $(label).removeClass("fa-sticky-note-o");
-          $(label).addClass("fa-arrow-right active");
+          $(label).parents("a").addClass("active");
+          $(label).addClass("fa fa-arrow-right");
         }
       }); 
     });

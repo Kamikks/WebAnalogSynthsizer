@@ -1,5 +1,6 @@
 //Views
 function createAddCardView() {
+  console.log("create add card view");
   $("#backPanel").append($('<div>')
                             .attr('id', 'addCardView')
                             .addClass('add-card-view')
@@ -10,10 +11,12 @@ function createAddCardView() {
     $("#addCardView").append($('<a>')
                .val(card)
                .attr('href', '#')
-               .append($('<i>')
-                           .addClass("fa fa-bars fa-lg")
-                           .text(card)
-               )
+               //.append($('<i>')
+               //            .addClass("fa fa-bars fa-lg")
+               //            .text(card)
+               ///)
+               .text(card)
+               .css('background', COLOR[card])
                .click(function(e) {
                  addCard($(e.currentTarget).val());
                  // switchAddCardView() must be called from model?
@@ -24,6 +27,7 @@ function createAddCardView() {
 }
 
 function switchAddCardView() {
+  console.log("switch add card view");
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#addCardView")[0] == null) {
     if($("#loadDeckView")[0]) { $("#loadDeckView").remove(); }

@@ -1,4 +1,4 @@
-onload = function() {
+tmp = function() {
     deck1 = document.getElementById('deck1');
     deck2 = document.getElementById('deck2');
     deck3 = document.getElementById('deck3');

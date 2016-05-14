@@ -135,26 +135,21 @@ ul {
   float: left;
   margin: 0 5px 5px 0;
   color: #fff;
-}
-
-.add-card-view i {
   width: 100px;
   height: 100px;
   margin: 0;
   line-height: 100px;
   text-align: center;
   background: #00a1e9;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  font-size: 1.1em;
 }
 
-.add-card-view a:hover i {
+.add-card-view a:hover {
   -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition-duration: 0.3s;
-}
-
-.add-card-view i:before {
-  padding: 0px;
-  line-height: 50px; 
 }
 
 .sendto-selector-view a {
@@ -162,22 +157,25 @@ ul {
   float: left;
   margin: 0 5px 5px 0;
   color: #fff;
-}
-
-.sendto-selector-view i {
   width: 70px;
   height: 70px;
   margin: 0;
   line-height: 70px;
   text-align: center;
   background: #1b81e9;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+}
+
+.sendto-selector-view i {
+  font-size: 0.8em;
 }
 
 .sendto-selector-view .active {
   background: #987638;
 }
 
-.sendto-selector-view a:hover i {
+.sendto-selector-view a:hover {
   -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition-duration: 0.3s;
@@ -187,4 +185,15 @@ ul {
 .sendto-selector-view i:before {
   padding: 0px;
   line-height: 70px; 
+}
+
+.btn-menu {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.btn-margin {
+  margin-left: 5px;
+  margin-right: 5px;
 }

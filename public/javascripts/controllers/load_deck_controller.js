@@ -9,10 +9,12 @@ var saveDeck = function() {
   return JSON.stringify(result);
 }
 
-var loadDeck = function(json) {
+loadDeck = function(json) {
+  console.log("load deck start");
   initDeck();
   var card = null;
-  var objList = $.parseJSON(json);
+  //var objList = $.parseJSON(json);
+  var objList = json;
   // create all object
   $.each(objList, function(i, obj) {
     switch(obj.type) {

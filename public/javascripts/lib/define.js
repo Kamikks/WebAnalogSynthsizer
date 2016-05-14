@@ -30,3 +30,17 @@ const CARDLIST = [SAW, SINE, SQUARE,
                   ADSR, LOWPASS,
                   HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEACKING, NOTCH, 
                   KEY]
+const COLOR = {
+  'sawtooth': "#477332",
+  'sine': "#477332",
+  'square': "#477332",
+  'adsr': "#123457",
+  'lowpass': "#87DA1A",
+  'highpass': "#87DA1A",
+  'bandpass': "#87DA1A",
+  'lowshelf': "#87DA1A",
+  'highshelf': "#87DA1A",
+  'peaking': "#87DA1A",
+  'notch': "#87DA1A",
+  'keyboard': "#123125"
+  }
