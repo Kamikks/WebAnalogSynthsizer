@@ -1,7 +1,10 @@
 // Controller
 function onCardClose(id) {
   var obj = ProtoCardModel.findById(id);
-  if(obj.type != DEST) {
+  if(obj.type == KEY) {
+    obj.disconnect({oneway: true});
+    ProtoCardModel.remove(obj.id);
+  } else if(obj.type != DEST) {
     obj.disconnect({}); 
     // delete from ProtoCardModel.list
     ProtoCardModel.remove(obj.id);

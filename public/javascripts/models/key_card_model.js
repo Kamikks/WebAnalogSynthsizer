@@ -14,6 +14,7 @@ KeyCardModel.prototype = {
   changeValue: function(keydown, noteNum) {
     if(keydown) {
       if(this.keyonList.length < this.maxPolyCount) {
+console.log(this);
         //var freq = KEYC * Math.pow(1.0595, noteNum);
         //console.log(noteNum);
         for(var i=0; i<this.next.length; i++) {

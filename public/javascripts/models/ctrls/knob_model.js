@@ -62,6 +62,10 @@ KnobModel.prototype = {
   },
 
   updateView: function() {
+  },
+
+  remove: function() {
+    KnobModel.remove(this.id);
   }
 }
 

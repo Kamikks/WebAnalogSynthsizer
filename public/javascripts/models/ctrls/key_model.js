@@ -85,5 +85,9 @@ KeyModel.prototype = {
   },
 
   updateView: function() {
+  },
+
+  remove: function() {
+    KeyModel.remove(this.id);
   }
 }

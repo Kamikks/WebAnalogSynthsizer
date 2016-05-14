@@ -80,6 +80,10 @@ MidiselectorModel.prototype = {
 
   removeObserver: function(observer) {
     this.observers.splice(this.observers.indexOf(observer), 1);
+  },
+
+  remove: function() {
+    MidiselectorModel.remove(this.id);
   }
   
 }
