@@ -11,6 +11,7 @@
     "bootstrap": "latest",
     "less-middleware": "latest",
     "chart.js": "latest",
-    "jade": "latest"
+    "jade": "latest",
+    "body-parser": "latest"
   }
 }

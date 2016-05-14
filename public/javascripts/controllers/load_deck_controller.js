@@ -1,4 +1,4 @@
-var saveDeck = function() {
+var saveDeck = function(name) {
   var result = [];
   $.each(ProtoCardModel.list, function(i, obj) {
     if(obj.type != DEST) {
@@ -6,10 +6,16 @@ var saveDeck = function() {
       result.push(data);
     }
   });
-  return JSON.stringify(result);
+  var json =  JSON.stringify(result);
+  $.ajax({
+    url: "/presets/" + name,
+    type: "POST",
+    contentType: "application/json",
+    data: json
+  }); 
 }
 
-loadDeck = function(json) {
+var loadDeck = function(json) {
   console.log("load deck start");
   initDeck();
   var card = null;
