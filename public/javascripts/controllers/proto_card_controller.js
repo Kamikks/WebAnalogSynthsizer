@@ -14,14 +14,17 @@ function onCardClose(id) {
 function sendtoSelect(sendfromId, sendtoId) {
   var sendFrom = ProtoCardModel.findById(sendfromId);
   var sendTo = ProtoCardModel.findById(sendtoId);
-  if(sendTo.type == ADSR && sendTo.prev.length > 0) {
-    // copy sendTo
-    //console.log(sendTo);
-    sendTo = new AdsrCardModel({obj: sendTo});
+  if(sendFrom.isConnected(sendTo)) {
+    console.log("disconnect from " + sendFrom.name + " to " + sendTo.name);
+    sendFrom.disconnect({next: sendTo});
+  } else {
+    if(sendTo.type == ADSR && sendTo.prev.length > 0) {
+      // copy sendTo
+      sendTo = new AdsrCardModel({obj: sendTo});
+    }
+    console.log("sendFrom: " + sendFrom.name);
+    sendFrom.connect(sendTo);
   }
-  console.log("sendFrom: " + sendFrom.name);
-  sendFrom.disconnect({oneway: true});
-  sendFrom.connect(sendTo);
 }
 
 function dropCard(targetId, dropToId) {

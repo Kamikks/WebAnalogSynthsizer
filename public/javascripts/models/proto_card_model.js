@@ -88,24 +88,31 @@ ProtoCardModel.prototype = {
   disconnect: function(params) {
     console.log("disconnect: " + this.name);
     var oneway = params.oneway || false;
+    var next = params.next || null;
     var _this = this;
-    // if oneway, delete only next
-    console.log(this.next);
-    $.each(this.next, function(id, next) {
+    if(next) {
+      // delete only one next
+      console.log("disconnect: next=> " + next.name);
       next.prev.splice(next.prev.indexOf(_this), 1);
-      if(next.name == null) { 
-        // next is clone
-        var nextOrg = ProtoCardModel.findById(next.id);
-        nextOrg.clone.splice(nextOrg.clone.indexOf(next), 1); 
-      }
-    });
-    this.next = [];
-    if(oneway == false) {
-    // if twoway, delete from prev and next
-      $.each(this.prev, function(id, prev) {
-        prev.next.splice(prev.next.indexOf(_this), 1);
+      _this.next.splice(_this.next.indexOf(next), 1);
+    } else {
+      // if oneway, delete only next
+      $.each(this.next, function(id, next) {
+        next.prev.splice(next.prev.indexOf(_this), 1);
+        if(next.name == null) { 
+          // next is clone
+          var nextOrg = ProtoCardModel.findById(next.id);
+          nextOrg.clone.splice(nextOrg.clone.indexOf(next), 1); 
+        }
       });
-      this.prev = [];
+      this.next = [];
+      if(oneway == false) {
+      // if twoway, delete from prev and next
+        $.each(this.prev, function(id, prev) {
+          prev.next.splice(prev.next.indexOf(_this), 1);
+        });
+        this.prev = [];
+      }
     }
   },
 
@@ -119,21 +126,24 @@ ProtoCardModel.prototype = {
       type: this.type,
       color: this.color,
       deckId: this.deckId,
-//      clone: this.clone.length,
       ctrls: [],
       prev: [],
       next: []
     }
     for(var k in this.ctrls) {
-      //obj.ctrls.push({key: k, id: this.ctrls[k].id, value: this.ctrls[k].value || null});
       obj.ctrls.push({key: k, value: this.ctrls[k].value || null});
     }
-//    $.each(this.prev, function(i, prev) {
-//      obj.prev.push(prev.id); 
-//    }); 
     $.each(this.next, function(i, next) {
       obj.next.push(next.id); 
     }); 
     return obj;
+  },
+
+  isConnected: function(next) {
+    var result = false;
+    $.each(this.next, function(id, obj) {
+      if(obj.id == next.id) { result = true; }
+    });
+    return result;
   }
 }
