@@ -24,12 +24,13 @@ const BANDPASS = 'bandpass';
 const LOWSHELF = 'lowshelf';
 const HIGHSHELF = 'highshelf';
 const PEACKING = 'peaking';
+const PANNER = 'panner';
 const NOTCH = 'notch';
 
 const CARDLIST = [SAW, SINE, SQUARE, 
                   ADSR, LOWPASS,
-                  HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEACKING, NOTCH, 
-                  KEY]
+                  HIGHPASS, BANDPASS, 
+                  KEY, PANNER]
 const COLOR = {
   'sawtooth': "#477332",
   'sine': "#477332",
@@ -42,5 +43,6 @@ const COLOR = {
   'highshelf': "#87DA1A",
   'peaking': "#87DA1A",
   'notch': "#87DA1A",
-  'keyboard': "#123125"
+  'keyboard': "#123125",
+  'panner': "#da1278"
   }

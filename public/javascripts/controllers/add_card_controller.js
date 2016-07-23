@@ -34,5 +34,8 @@ addCard = function(selected) {
         });
       }); 
       break;
+    case PANNER:
+      var panner = new PannerCardModel({name: selected.toUpperCase(), color: COLOR[selected]});
+      break;
   }
 };
