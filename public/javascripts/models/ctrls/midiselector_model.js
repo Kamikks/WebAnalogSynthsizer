@@ -22,7 +22,9 @@ MidiselectorModel.create = function(params) {
   obj.type = MIDI_CTRL;
   MidiselectorModel.list.push(obj);
   // https server is required when use sysex
-  navigator.requestMIDIAccess({sysex: false}).then(obj.loadMidiDevice.bind(obj), obj.loadError);
+  if(navigator.requestMIDIAccess != undefined) {
+    navigator.requestMIDIAccess({sysex: false}).then(obj.loadMidiDevice.bind(obj), obj.loadError);
+  }
   return obj;
 }
 
