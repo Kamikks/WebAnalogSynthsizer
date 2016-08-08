@@ -37,5 +37,8 @@ addCard = function(selected) {
     case PANNER:
       var panner = new PannerCardModel({name: selected.toUpperCase(), color: COLOR[selected]});
       break;
+    case DELAY:
+      var delay = new DelayCardModel({name: selected.toUpperCase(), color: COLOR[selected]});
+      break;
   }
 };

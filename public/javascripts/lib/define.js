@@ -26,11 +26,12 @@ const HIGHSHELF = 'highshelf';
 const PEACKING = 'peaking';
 const PANNER = 'panner';
 const NOTCH = 'notch';
+const DELAY = 'delay';
 
 const CARDLIST = [SAW, SINE, SQUARE, 
                   ADSR, LOWPASS,
                   HIGHPASS, BANDPASS, 
-                  KEY, PANNER]
+                  KEY, PANNER, DELAY]
 const COLOR = {
   'sawtooth': "#477332",
   'sine': "#477332",
@@ -44,5 +45,6 @@ const COLOR = {
   'peaking': "#87DA1A",
   'notch': "#87DA1A",
   'keyboard': "#123125",
-  'panner': "#da1278"
+  'panner': "#da1278",
+  'delay': "#338800"
   }
