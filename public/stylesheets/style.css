@@ -29,8 +29,8 @@ textares {
   letter-spacing: -1px;
   padding-top: 4px;
   font-weight: bold;
+  text-shadow: 2px 2px 4px #555;
 } 
-
 
 .btn-menu {
   text-align: center;
@@ -46,6 +46,10 @@ textares {
 #background-panel {
   background-color: #fff;
   padding: 3px;
+}
+
+div.jumbotron {
+  background-color: #fff;
 }
 
 ul {
