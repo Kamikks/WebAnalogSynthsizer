@@ -46,7 +46,13 @@ html
 
   body(onload='loadDeck(#{preset})')
     header.navbar.navbar-fixed-top.navbar-inverse
-      div#logo.container Infinite
+      div.navbar-header
+        a(href="#").navbar-brand.navbar-center Infinite
+      div.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href="https://twitter.com/share", data-size="large").twitter-share-button Tweet
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     div.btn-menu
       button#initDeck.btn.btn-primary.btn-margin(title='Initialize Deck', type='button', onclick='location.href="/"')
         i.fa.fa-file-text-o.fa-lg
