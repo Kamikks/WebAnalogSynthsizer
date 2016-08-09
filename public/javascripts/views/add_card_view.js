@@ -33,9 +33,7 @@ function switchAddCardView() {
     if($("#loadDeckView")[0]) { $("#loadDeckView").remove(); }
     createAddCardView();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'hide', opacity: 'hide'}, 'slow', function() {
-        $(deck).css('display', 'none');
-      });
+      $(deck).css('display', 'none');
     });
     $("#addCardView").animate({height: 'show', opacity: 'show'}, 'slow', function() {
       $("#addCardView").css('display', 'block');
