@@ -22,23 +22,17 @@ function updateCard(id) {
   }
   if($("#"+obj.id)[0] == null) {
     // create new card element if there is no view
-    $("#"+obj.deckId).append($('<div>')
+    $("#"+obj.deckId).sortable({cursor: 'move', handle: ".card-header"}).append($('<div>')
                                  .addClass('card')
                                  .attr('id', obj.id)
-                                 .attr('draggable', true)
-                                 .on('dragstart', function(e) {
-                                   onDragStart(e); 
-                                 })
-                                 .on('dragend', function(e) {
-                                   onDragEnd(e);
-                                 })
+                                 .draggable({cursor: 'move', handle: ".card-header", connectToSortable: $('.deck'),
+                                            stop: function() {
+                                              $(this).css({height: 'inherit'});
+                                            }})
                                  .append($('<div>')
                                              .addClass('card-header')
                                              .css('border-left', '10px solid ' + obj.color)
                                              .html(obj.name)
-                                             .on('dragenter', function(e) {
-                                               onDragEnter(e);
-                                             })
                                              .append($('<button>')
                                                        .attr('type', 'button')
                                                        .attr('title', 'Delete this Card')
@@ -126,76 +120,9 @@ function createSendtoSelectorView(id) {
   cardBody.append(sendtoSelector);
 }
 
-var _tmpDrgId = null
-function onDragStart(e) {
-  $(e.currentTarget).css('opacity', '0.4');
-  e.originalEvent.dataTransfer.effectAllowed = 'move';
-  _tmpDrgId = $(e.currentTarget)[0].id;
-  console.log("onDragStart: " + _tmpDrgId);
-}
-
-function onDragEnter(e) {
-  var card = $(e.currentTarget).parents(".card");
-  if(_tmpDrgId != $(e.currentTarget).parents(".card")[0].id && $(".dragenter")[0] == null) {
-    console.log("onDragenter: " + $(e.currentTarget).parents(".card")[0].id + ", tmpDrgSrc: " + _tmpDrgId);
-    $(e.currentTarget).parents(".card").before($('<div>')
-                                  .addClass('dragenter')
-//                                  .css('display', 'none')
-                                  .on('dragleave', function(e) {
-                                    onDragLeave(e);
-                                  })
-                                  .on('dragover', function(e) {
-                                    onDragOver(e); 
-                                  })
-                                  .on('drop', function(e) {
-                                    onDrop(e);
-                                  })
-                             );
-//    $(".dragenter").animate({height: 'show', opacity: 'show'},
-//                             'slow',
-//                             function() {
-//                               $(".dragenter").css('display', 'block');
-//                             });
-  }
-}
-
-function onDragLeave(e) {
-  $(e.currentTarget).removeClass('dragenter');
-  $(e.currentTarget).animate({width: 'hide', height: 'hide', opacity: 'hide'}, 'slow', function() {
-                              $(e.currentTarget).remove();
-                            }); 
-}
-
-function onDragOver(e) {
-  if(e.preventDefault) {
-    e.preventDefault();
-  }
-  e.originalEvent.dataTransfer.dropEffect = 'move';
-}
-
-function onDrop(e) {
-  if(e.stopPropagation) {
-    e.stopPropagation();
-  }
-  console.log("onDrop: " + _tmpDrgId);
-  if(_tmpDrgId != e.currentTarget.id) {
-    $(e.currentTarget).after($("#"+_tmpDrgId));
-  }
-  $(e.currentTarget).removeClass('dragenter');
-  $(e.currentTarget).remove();
-  $('#'+_tmpDrgId).css('opacity', '1.0');
-  // TODO
-  //  dropCard(_tmpDrgId, e.currentTarget.id);
-}
-
-function onDragEnd(e) {
-  console.log("onDragend: " + _tmpDrgId);
-  $(".dragenter").remove();
-  $('#'+_tmpDrgId).css('opacity', '1.0');
-}
-
 function onAccordion(e) {
   var cardBody = $(e.currentTarget).parents(".card").find(".card-body");
+  console.log(cardBody);
   cardBody.animate({height: 'toggle', opacity: 'toggle'}, 'slow');
 }
 
