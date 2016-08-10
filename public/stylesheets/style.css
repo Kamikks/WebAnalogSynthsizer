@@ -23,13 +23,12 @@ textares {
 #logo {
   text-align: center;
   float: none;
-  font-size: 3em;
+  font-size: 2em;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
   padding-top: 4px;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px #555;
+  line-height: inherit;
 } 
 
 .btn-menu {
