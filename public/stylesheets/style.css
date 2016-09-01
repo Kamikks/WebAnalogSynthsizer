@@ -24,7 +24,7 @@ textares {
 #logo {
   text-align: center;
   float: none;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   color: #333;
   letter-spacing: 2px;
@@ -223,4 +223,14 @@ ul {
 }
 
 .deck {
+}
+
+.preset-label {
+  width: 20%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: inset 1px 4px 0px -6px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset 1px 4px 0px -6px rgba(0,0,0,0.5);
+  box-shadow: inset 1px 4px 0px -6px rgba(0,0,0,0.5);
 }
