@@ -16,7 +16,7 @@ app.use(bodyParser());
 app.get('/', function(req, res) {
   fs.readFile('./public/presets/Init.patch', 'utf8', function(err, text) {
     //console.log(text);
-    res.render('index', { title: 'Infinite', preset: text});
+    res.render('index', { title: 'Web Analog Synthesizer', preset: text});
   });
 });
 
@@ -26,7 +26,7 @@ app.get('/presets', function(req, res) {
     for(var i = 0; i < files.length; i++) {
       presetList.push(files[i].replace(".patch", ""));
     }
-    res.render('presets', { title: 'Infinite', presetList: presetList});
+    res.render('presets', { title: 'Web Analog Synthesizer', presetList: presetList});
   });
 });
 
@@ -34,7 +34,7 @@ app.get('/presets/:name', function(req, res) {
   // read presets file(json)
   fs.readFile('./public/presets/' + req.params.name + '.patch', 'utf8', function(err, text) {
     console.log(text);
-    res.render('index', { title: 'Infinite', preset: text});
+    res.render('index', { title: 'Web Analog Synthesizer', preset: text});
   });
 });
 
