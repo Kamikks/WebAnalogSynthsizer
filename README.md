@@ -53,6 +53,14 @@ Each card has three buttons.
 
   Delete selected card from the deck.
 
+## How to install
+1. Clone repository
+    git clone https://github.com/tKammy/WebAnalogSynthsizer.git
+2. Install npm package
+  If you fail to execute 'npm install', please execute it with '--no-bin-links' option.
+    npm install
+3. Start Service and access via Chrome browser
+    npm start
 
 ## License
 Infinite uses a Apache license v2. 

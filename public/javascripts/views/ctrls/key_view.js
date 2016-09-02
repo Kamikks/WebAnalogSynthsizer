@@ -9,27 +9,21 @@ function updateKey(id) {
     if ($("#"+id)[0] == null) {
       // create view
       //console.log("supportTouch: " + supportTouch);
-      if(supportTouch) {
-        $("#" + obj.cardId).find(".row").append($('<canvas>')
-                                                    .attr('id', id)
-                                                    .on('touchstart', function(e) {
-                                                      onTouchStartKey(e);
-                                                    })
-                                                    .on('touchend', function(e) {
-                                                      onTouchEndKey(e);
-                                                    })
-                                        );
-      } else {
-        $("#" + obj.cardId).find(".row").append($('<canvas>')
-                                                    .attr('id', id)
-                                                    .on('mousedown', function(e) {
-                                                      onMousedownKey(e);
-                                                    })
-                                                    .on('mouseup', function(e) {
-                                                      onMouseupKey(e);
-                                                    })
-                                        );
-      }
+      $("#" + obj.cardId).find(".row").append($('<canvas>')
+                                                  .attr('id', id)
+                                                  .on('touchstart', function(e) {
+                                                    onTouchStartKey(e);
+                                                  })
+                                                  .on('touchend', function(e) {
+                                                    onTouchEndKey(e);
+                                                  })
+                                                  .on('mousedown', function(e) {
+                                                    onMousedownKey(e);
+                                                  })
+                                                  .on('mouseup', function(e) {
+                                                    onMouseupKey(e);
+                                                  })
+                                      );
     } 
     // update view
     var ctx = $("#" + id)[0].getContext('2d');
