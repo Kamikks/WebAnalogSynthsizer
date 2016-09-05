@@ -16,6 +16,7 @@ html
     script(type='text/javascript', src='/javascripts/views/proto_card_view.js')
     script(type='text/javascript', src='/javascripts/views/add_card_view.js')
     script(type='text/javascript', src='/javascripts/views/init_deck_view.js')
+    script(type='text/javascript', src='/javascripts/views/save_deck_view.js')
     // CONTROLLER
     script(type='text/javascript', src='/javascripts/controllers/ctrls/knob_controller.js')
     script(type='text/javascript', src='/javascripts/controllers/ctrls/key_controller.js')
@@ -24,6 +25,7 @@ html
     script(type='text/javascript', src='/javascripts/controllers/add_card_controller.js')
     script(type='text/javascript', src='/javascripts/controllers/init_deck_controller.js')
     script(type='text/javascript', src='/javascripts/controllers/load_deck_controller.js')
+    script(type='text/javascript', src='/javascripts/controllers/save_deck_controller.js')
     // MODEL
     script(type='text/javascript', src='/javascripts/models/ctrls/knob_model.js')
     script(type='text/javascript', src='/javascripts/models/ctrls/key_model.js')
@@ -59,6 +61,10 @@ html
         i.fa.fa-plus-square-o.fa-lg
       button#loadDeck.btn.btn-primary.btn-margin(title='Open Preset', type='button', onclick='location.href="/presets"')
         i.fa.fa-folder-open-o.fa-lg
+      button#saveDeck.btn.btn-primary.btn-margin(title='Save deck', type='button')
+        i.fa.fa-floppy-o.fa-lg
+    div.btn-menu
+      input#presetLabel.preset-label(type="text", name="preset-name")
     div.jumbotron
       div.container
         div#backPanel.row 
