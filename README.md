@@ -55,11 +55,15 @@ Each card has three buttons.
 
 ## How to install
 1. Clone repository
-    git clone https://github.com/tKammy/WebAnalogSynthsizer.git
+
 2. Install npm package
+3. 
   If you fail to execute 'npm install', please execute it with '--no-bin-links' option.
+
     npm install
+
 3. Start Service and access via Chrome browser
+
     npm start
 
 ## License
