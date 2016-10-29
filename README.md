@@ -62,16 +62,16 @@ Each card has three buttons.
 
 2. Install npm package
 
-       npm install
+        npm install
        
 3. 
   If you fail to execute 'npm install', please execute it with '--no-bin-links' option.
 
-       npm install --no-bin-links
+        npm install --no-bin-links
 
 3. Start Service and access via Chrome browser
 
-       npm start
+        npm start
 
 ## License
 WebAnalogSynthesizer uses a Apache license v2. 
