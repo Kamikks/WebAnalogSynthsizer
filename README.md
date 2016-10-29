@@ -2,58 +2,56 @@
 This is web based analog synthesizer.
 It is almost written in HTML and Javascript using Web Audio API.
 
-## DESCRIPTION
-
-### Card Type
+## Card Type
 This is card based synthesizer.
 
-#### Oscillator card
+### Oscillator card
 
   There are sawtooth, sine and square cards.
 
-#### ADSR card
+### ADSR card
 
   Envelope Generator card.
 
-#### Filter card
+### Filter card
 
   There Lowpass, Highpass and Bandpass filter cards.
 
-#### Keyboard card
+### Keyboard card
 
   Midi control and web based keyboard card.
 
-#### Panner card
+### Panner card
 
   This card is Panner effect.
   
 
-### Function
+## Function
 There are initialize, add, and open function.
-#### initialize
+### initialize
 
   Initialize the deck.Clear all added cards except for "master" card.
 
-#### add
+### add
 
   Select and add card to the deck.
   
-#### open 
+### open 
 
   Open ready-made sound patch.
 
 
-### Card operation
+## Card operation
 Each card has three buttons.
-#### left button
+### left button
 
   Select card which selected card connect to.
 
-#### middle button
+### middle button
 
   Maxmize/minimize selected card.
 
-#### right button
+### right button
 
   Delete selected card from the deck.
 
