@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
 
 app.get('/', function(req, res) {
-  fs.readFile('./public/presets/Init.patch', 'utf8', function(err, text) {
+  fs.readFile('./public/presets/UltraSawBass.patch', 'utf8', function(err, text) {
     //console.log(text);
     res.render('index', { title: 'Web Analog Synthesizer', preset: text});
   });
