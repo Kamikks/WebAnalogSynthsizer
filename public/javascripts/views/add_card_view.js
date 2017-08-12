@@ -6,15 +6,21 @@ function createAddCardView() {
                             .addClass('add-card-view')
                             .css('display', 'none')
                  );
+  $("#closeView").addClass('close-view')
+                 .append($('<a>')
+                     .attr('id', 'closeButton')
+                     .attr('href', '#')
+                     .text('CLOSE')
+                     .css('background', '#333')
+                     .click(function(e) {
+                       switchAddCardView();
+                     }) 
+  );
 
   $.each(CARDLIST, function(i, card) {
     $("#addCardView").append($('<a>')
                .val(card)
                .attr('href', '#')
-               //.append($('<i>')
-               //            .addClass("fa fa-bars fa-lg")
-               //            .text(card)
-               ///)
                .text(card)
                .css('background', COLOR[card])
                .click(function(e) {
@@ -33,17 +39,15 @@ function switchAddCardView() {
     if($("#loadDeckView")[0]) { $("#loadDeckView").remove(); }
     createAddCardView();
     $.each(decks, function(i, deck) {
-      $(deck).css('display', 'none');
+      $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
     });
-    $("#addCardView").animate({height: 'show', opacity: 'show'}, 'slow', function() {
-      $("#addCardView").css('display', 'block');
-    }); 
+    $("#addCardView").animate({height: 'show', opacity: 'show'}, 'slow');
+    $("#openMenu").prop('checked', false);
   } else {
     $("#addCardView").remove();
+    $("#closeButton").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'show', opacity: 'show'}, 'slow', function() {
-        $(deck).css('display', 'block');
-      });
+      $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
     });
   }
 }

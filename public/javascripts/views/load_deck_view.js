@@ -7,6 +7,17 @@ function createLoadDeckView(presetList) {
                             .css('display', 'block')
                  );
 
+  $("#closeView").addClass('close-view')
+                 .append($('<a>')
+                     .attr('id', 'closeButton')
+                     .attr('href', '#')
+                     .text('CLOSE')
+                     .css('background', '#333')
+                     .click(function(e) {
+                       switchLoadDeckView();
+                     }) 
+  );
+
   $.each(presetList.presetList, function(i, preset) {
     $("#loadDeckView").append($('<a>')
                .val(preset)
@@ -35,9 +46,11 @@ function switchLoadDeckView() {
       $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
     });
     $("#loadDeckView").animate({height: 'show', opacity: 'toggle'}, 'slow');
+    $("#openMenu").prop('checked', false);
     sendGetPresetListRequest();
   } else {
     $("#loadDeckView").remove();
+    $("#closeButton").remove();
     $.each(decks, function(i, deck) {
       $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
     });
