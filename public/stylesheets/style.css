@@ -1,7 +1,7 @@
 body {
   padding-top: 60px;
   font-size: 16px;
-  font-family: 'arial narrow';
+  //font-family: 'arial narrow';
   background-color: #eee;
 }
 
@@ -188,28 +188,30 @@ ul {
   display: block;
   float: left;
   margin: 0 5px 5px 0;
-  color: #fff;
+  color: #aaa;
   width: 70px;
   height: 70px;
   margin: 0;
   line-height: 70px;
   text-align: center;
-  background: #1b81e9;
+  background: #eee;
   display: inline-block;
   margin: 0 5px 5px 0;
 }
 
 .sendto-selector-view i {
-  font-size: 0.8em;
+  font-size: 0.6em;
 }
 
 .sendto-selector-view .active {
-  background: #987638;
+  color: #fff;
+  background: #555;
 }
 
 .sendto-selector-view a:hover {
   transition-duration: 0.3s;
-  background: #987638;
+  background: #555;
+  color: #fff;
 }
 
 .sendto-selector-view i:before {
