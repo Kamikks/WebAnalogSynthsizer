@@ -1,49 +1,63 @@
 //Views
-function createLoadDeckView() {
+function createLoadDeckView(presetList) {
+  console.log("createLoadDeckView");
   $("#backPanel").append($('<div>')
                             .attr('id', 'loadDeckView')
                             .addClass('add-card-view')
-                            .css('display', 'none')
+                            .css('display', 'block')
                  );
 
-  for(var key in defaultPatch) {
+  $.each(presetList.presetList, function(i, preset) {
     $("#loadDeckView").append($('<a>')
-               .val(key)
+               .val(preset)
                .attr('href', '#')
-               .append($('<i>')
-                           .addClass("fa fa-bars fa-lg")
-                           .text(key)
-               )
+               .text(preset)
                .click(function(e) {
-                 loadDeck(defaultPatch[$(e.currentTarget).val()]);
+                 patchFile = "../../presets/" + $(e.currentTarget).val() + ".patch";
+                 console.log($.getJSON(patchFile));
+                 $.getJSON(patchFile, function(data){
+			loadDeck(data);
+		 });
                  // switchAddCardView() must be called from model?
                  switchLoadDeckView();
                }) 
     )
-  };
+    .animate({height: 'show'})
+  });
 }
 
 function switchLoadDeckView() {
+  console.log("switch load deck view");
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#loadDeckView")[0] == null) {
     if($("#addCardView")[0]) { $("#addCardView").remove() };
-    createLoadDeckView();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'hide', opacity: 'hide'}, 'slow', function() {
-        $(deck).css('display', 'none');
-      });
+      $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
     });
-    $("#loadDeckView").animate({height: 'show', opacity: 'show'}, 'slow', function() {
-      $("#loadDeckView").css('display', 'block');
-    }); 
+    $("#loadDeckView").animate({height: 'show', opacity: 'toggle'}, 'slow');
+    sendGetPresetListRequest();
   } else {
     $("#loadDeckView").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'show', opacity: 'show'}, 'slow', function() {
-        $(deck).css('display', 'block');
-      });
+      $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
     });
   }
+}
+
+function sendGetPresetListRequest() {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    switch(xhr.readyState) {
+      case 4:
+        if(xhr.status == 200) {
+          createLoadDeckView(this.response);
+        }
+    }
+  }
+
+  xhr.open('GET', '/presets', true);
+  xhr.responseType = 'json';
+  xhr.send(null); 
 }
 
 $(function() {

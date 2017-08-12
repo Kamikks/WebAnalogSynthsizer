@@ -16,6 +16,7 @@ html
     script(type='text/javascript', src='/javascripts/views/proto_card_view.js')
     script(type='text/javascript', src='/javascripts/views/add_card_view.js')
     script(type='text/javascript', src='/javascripts/views/init_deck_view.js')
+    script(type='text/javascript', src='/javascripts/views/load_deck_view.js')
     script(type='text/javascript', src='/javascripts/views/save_deck_view.js')
     // CONTROLLER
     script(type='text/javascript', src='/javascripts/controllers/ctrls/knob_controller.js')
@@ -59,7 +60,7 @@ html
         i.fa.fa-file-text-o.fa-lg
       button#addCard.btn.btn-primary.btn-margin(title='Add audio card', type='button')
         i.fa.fa-plus-square-o.fa-lg
-      button#loadDeck.btn.btn-primary.btn-margin(title='Open Preset', type='button', onclick='location.href="/presets"')
+      button#loadDeck.btn.btn-primary.btn-margin(title='Open Preset', type='button')
         i.fa.fa-folder-open-o.fa-lg
       button#saveDeck.btn.btn-primary.btn-margin(title='Save deck', type='button')
         i.fa.fa-floppy-o.fa-lg

@@ -26,15 +26,8 @@ app.get('/presets', function(req, res) {
     for(var i = 0; i < files.length; i++) {
       presetList.push(files[i].replace(".patch", ""));
     }
-    res.render('presets', { title: 'Web Analog Synthesizer', presetList: presetList});
-  });
-});
-
-app.get('/presets/:name', function(req, res) {
-  // read presets file(json)
-  fs.readFile('./public/presets/' + req.params.name + '.patch', 'utf8', function(err, text) {
-    console.log(text);
-    res.render('index', { title: 'Web Analog Synthesizer', preset: text});
+    console.log(presetList);
+    res.send({ title: 'Web Analog Synthesizer', presetList: presetList});
   });
 });
 
