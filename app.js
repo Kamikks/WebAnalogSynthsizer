@@ -6,8 +6,7 @@ var bodyParser = require('body-parser');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -15,7 +14,6 @@ app.use(bodyParser());
 
 app.get('/', function(req, res) {
   fs.readFile('./public/presets/FatSawBass.patch', 'utf8', function(err, text) {
-    //console.log(text);
     res.render('index', { title: 'Web Analog Synthesizer', preset: text});
   });
 });
@@ -26,7 +24,6 @@ app.get('/presets', function(req, res) {
     for(var i = 0; i < files.length; i++) {
       presetList.push(files[i].replace(".patch", ""));
     }
-    console.log(presetList);
     res.send({ title: 'Web Analog Synthesizer', presetList: presetList});
   });
 });
