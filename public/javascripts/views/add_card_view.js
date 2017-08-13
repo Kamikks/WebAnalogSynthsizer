@@ -11,7 +11,6 @@ function createAddCardView() {
                      .attr('id', 'closeButton')
                      .attr('href', '#')
                      .text('CLOSE')
-                     .css('background', '#333')
                      .click(function(e) {
                        switchAddCardView();
                      }) 

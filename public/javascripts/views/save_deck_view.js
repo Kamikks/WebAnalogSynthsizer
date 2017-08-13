@@ -28,7 +28,6 @@ function createSaveDeckView() {
                              .attr('id', 'saveButton')
                              .attr('href', '#')
                              .text('SAVE')
-                             .css('background', '#333')
                              .click(function(e) {
                                saveDeck();
                                switchSaveDeckView();
