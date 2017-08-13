@@ -11,7 +11,6 @@ function createAddCardView() {
                      .attr('id', 'closeButton')
                      .attr('href', '#')
                      .text('CLOSE')
-                     .css('background', '#333')
                      .click(function(e) {
                        switchAddCardView();
                      }) 
@@ -36,10 +35,13 @@ function switchAddCardView() {
   console.log("switch add card view");
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#addCardView")[0] == null) {
-    if($("#loadDeckView")[0]) { $("#loadDeckView").remove(); }
+    $("#loadDeckView").remove();
+    $("#saveDeckView").remove();
+    $("#closeButton").remove();
+    $("#saveButton").remove();
     createAddCardView();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
+      $(deck).hide();
     });
     $("#addCardView").animate({height: 'show', opacity: 'show'}, 'slow');
     $("#openMenu").prop('checked', false);
@@ -47,7 +49,7 @@ function switchAddCardView() {
     $("#addCardView").remove();
     $("#closeButton").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
+      $(deck).show();
     });
   }
 }

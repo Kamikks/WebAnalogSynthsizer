@@ -12,7 +12,6 @@ function createLoadDeckView(presetList) {
                      .attr('id', 'closeButton')
                      .attr('href', '#')
                      .text('CLOSE')
-                     .css('background', '#333')
                      .click(function(e) {
                        switchLoadDeckView();
                      }) 
@@ -41,18 +40,21 @@ function switchLoadDeckView() {
   console.log("switch load deck view");
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#loadDeckView")[0] == null) {
-    if($("#addCardView")[0]) { $("#addCardView").remove() };
+    $("#addCardView").remove();
+    $("#saveDeckView").remove();
+    $("#closeButton").remove();
+    $("#saveButton").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
+      $(deck).hide();
     });
-    $("#loadDeckView").animate({height: 'show', opacity: 'toggle'}, 'slow');
+    $("#loadDeckView").animate({height: 'show', opacity: 'show'}, 'slow');
     $("#openMenu").prop('checked', false);
     sendGetPresetListRequest();
   } else {
     $("#loadDeckView").remove();
     $("#closeButton").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
+      $(deck).show();
     });
   }
 }

@@ -14,7 +14,7 @@ app.use(bodyParser());
 
 app.get('/', function(req, res) {
   fs.readFile('./public/presets/FatSawBass.patch', 'utf8', function(err, text) {
-    res.render('index', { title: 'Web Analog Synthesizer', preset: text});
+    res.render('index', { title: 'Deck Synth', preset: text});
   });
 });
 
@@ -24,7 +24,7 @@ app.get('/presets', function(req, res) {
     for(var i = 0; i < files.length; i++) {
       presetList.push(files[i].replace(".patch", ""));
     }
-    res.send({ title: 'Web Analog Synthesizer', presetList: presetList});
+    res.send({ title: 'Deck Synth', presetList: presetList});
   });
 });
 

@@ -25,9 +25,9 @@ textares {
 #logo {
   text-align: center;
   float: none;
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: bold;
-  color: #333;
+  color: #234039;
   letter-spacing: 2px;
   padding-top: 4px;
   line-height: inherit;
@@ -113,7 +113,7 @@ ul {
 
 .row-extend {
   margin-right: 10px;
-  text-align: center;
+  margin: 0 auto;
 }
 
 .knob-large {
@@ -174,7 +174,7 @@ ul {
   margin: 0;
   line-height: 100px;
   text-align: center;
-  background: #00a1e9;
+  background: #154256;
   display: inline-block;
   margin: 0 5px 5px 0;
   font-size: 1.1em;
@@ -240,12 +240,13 @@ ul {
   padding: 20px;
   transition: right .5s, left .5s;
   font-size: 30px;
-  background-color: #555;
+  background-color: #234039;
 }
 
 .toggle {
-  font-size: 1.2em;
+  font-size: 1.6em;
   cursor: pointer;
+  color: #234039;
 }
 
 .toggle:hover {
@@ -264,6 +265,11 @@ ul {
   color: #fff;
   margin-bottom: 10px;
   border-bottom: solid 1px #bbb;
+  margin-top: 20px;
+}
+
+#menu li #initDeck {
+  margin-top: 300px;
 }
 
 #menu li div:hover {
@@ -283,6 +289,7 @@ ul {
   width: 100%; 
   font-size: 1.8em;
   color: #fff;
+  background-color: #234039;
 }
 
 .close-view ul li {
