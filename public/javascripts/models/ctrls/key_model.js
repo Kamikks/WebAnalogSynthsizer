@@ -26,10 +26,10 @@ KeyModel.create = function(params) {
     var note = 48;
     for (var i = 0; i < 14; i++) {
       if([0, 3, 7, 10, 14].indexOf(i) < 0) {
-        obj.keys.push({x: 20 * i - 6, y: 0, h: 90, w: 12, black: true, on: false, note: note});
+        obj.keys.push({x: 30 * i - 9, y: 0, h: 90, w: 18, black: true, on: false, note: note});
         note++;
       }
-      obj.keys.push({x: 20 * i, y: 0, h: 140, w: 20, black: false, on: false, note: note});
+      obj.keys.push({x: 30 * i, y: 0, h: 140, w: 30, black: false, on: false, note: note});
       note++;
     };
     KeyModel.list.push(obj);

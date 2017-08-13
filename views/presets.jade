@@ -1,8 +1,0 @@
-extend layout
-
-block content
-  - for(var i = 0; i < presetList.length; i++) {
-  - var preset = presetList[i];
-  div.add-card-view
-    a(href='/presets/#{preset}')  #{preset}
-  - }

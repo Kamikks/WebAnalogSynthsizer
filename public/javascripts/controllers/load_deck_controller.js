@@ -2,8 +2,8 @@ var loadDeck = function(json) {
   console.log("load deck start");
   initDeck();
   var card = null;
-  //var objList = $.parseJSON(json);
   var objList = json;
+
   // create all object
   $.each(objList, function(i, obj) {
     switch(obj.type) {
@@ -53,4 +53,17 @@ var loadDeck = function(json) {
       sendFrom.connect(sendTo);
     }); 
   });
+}
+
+var loadDeckOnStart = function() {
+  var xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function() {
+    if(xhr.status == 200) {
+      loadDeck(this.response);
+    }
+  }
+      
+  xhr.responseType = 'json';
+  xhr.open("GET", "../../presets/FatSawBass.patch");
+  xhr.send();
 }

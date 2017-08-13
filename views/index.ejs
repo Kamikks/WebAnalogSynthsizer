@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/components/jquery-ui/jquery-ui.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+		<script type="text/javascript" src="/components/jquery/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="/components/jquery-ui/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/components/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/define.js"></script>
+		<!-- VIEW-->
+		<script type="text/javascript" src="/javascripts/views/ctrls/knob_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/ctrls/key_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/ctrls/midiselector_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/proto_card_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/add_card_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/init_deck_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/load_deck_view.js"></script>
+		<script type="text/javascript" src="/javascripts/views/save_deck_view.js"></script>
+		<!-- CONTROLLER-->
+		<script type="text/javascript" src="/javascripts/controllers/ctrls/knob_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/ctrls/key_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/ctrls/midiselector_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/proto_card_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/add_card_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/init_deck_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/load_deck_controller.js"></script>
+		<script type="text/javascript" src="/javascripts/controllers/save_deck_controller.js"></script>
+		<!-- MODEL-->
+		<script type="text/javascript" src="/javascripts/models/ctrls/knob_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/ctrls/key_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/ctrls/midiselector_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/proto_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/adsr_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/dest_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/osc_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/filter_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/midiin_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/key_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/panner_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/models/delay_card_model.js"></script>
+		<script type="text/javascript" src="/javascripts/main.js"></script>
+		<!-- STYLESHEET-->
+		<link rel="stylesheet" href="/components/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/stylesheets/style.css">
+	</head>
+	<body onload="loadDeckOnStart()">
+		<header class="navbar navbar-fixed-top navbar-custom">
+			<div>
+				<div class="navbar-title">
+					<a href="#" id="logo" class="navbar-brand">Web Analog Synthesizer</a>
+				</div>
+		    	<!--<div class="navbar-twitter">
+					<a href="https://twitter.com/share" data-size="large" class="twitter-share-button">Tweet</a>
+				</div>
+				<script>
+					!function(d,s,id){
+						var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+						if(!d.getElementById(id)){
+							js=d.createElement(s);
+							js.id=id;
+							js.src=p+'://platform.twitter.com/widgets.js';
+							fjs.parentNode.insertBefore(js,fjs);
+						}
+					}(document, 'script', 'twitter-wjs');
+				</script>-->
+				<label class="toggle navbar-twitter" for="openMenu"><i class="fa fa-bars" aria-hidden="true"></i></label>
+				<input id="openMenu" type="checkbox">
+					<div id="menu">
+						<nav>
+							<ul>
+								<li><div href="#" id="addCard">ADD</div></li>
+								<li><div href="#" id="loadDeck">LOAD</div></li>
+								<li><div href="#" id="initDeck">CLEAR</div></li>
+								<li><div href="#" id="saveDeck">SAVE</div></li>
+							</ul>
+						</nav>
+					</div>
+
+			</div>
+		</header>
+		
+		<div class="jumbotron">
+			<div class="container">
+				<div id="backPanel" class="row"> 
+					<div id="deck1" class="deck col-md-4"></div>
+					<div id="deck2" class="deck col-md-4"></div>
+					<div id="deck3" class="deck col-md-4"></div>
+				</div>
+				<div id="closeView"></div>
+			</div>
+		</div>
+	</body>
+</html>
