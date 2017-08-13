@@ -265,6 +265,11 @@ ul {
   color: #fff;
   margin-bottom: 10px;
   border-bottom: solid 1px #bbb;
+  margin-top: 20px;
+}
+
+#menu li #initDeck {
+  margin-top: 300px;
 }
 
 #menu li div:hover {

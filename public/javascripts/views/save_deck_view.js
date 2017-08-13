@@ -51,10 +51,13 @@ function createSaveDeckView() {
 function switchSaveDeckView() {
   var decks = ["#deck1", "#deck2", "#deck3"];
   if($("#saveDeckView")[0] == null) {
-    if($("#loadDeckView")[0]) { $("#loadDeckView").remove(); }
+    $("#loadDeckView").remove();
+    $("#addCardView").remove();
+    $("#closeButton").remove();
+    $("#saveButton").remove();
     createSaveDeckView();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'hide', opacity: 'toggle'}, 'slow');
+      $(deck).hide();
     });
     $("#saveDeckView").animate({height: 'show', opacity: 'show'}, 'slow');
     $("#openMenu").prop('checked', false);
@@ -63,7 +66,7 @@ function switchSaveDeckView() {
     $("#closeButton").remove();
     $("#saveButton").remove();
     $.each(decks, function(i, deck) {
-      $(deck).animate({height: 'show', opacity: 'show'}, 'slow');
+      $(deck).show();
     });
   }
 }
