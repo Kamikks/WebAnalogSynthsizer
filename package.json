@@ -6,8 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "ejs": "~2.3.3",
-    "express": "~4.13.1",
+    "ejs": "latest",
+    "express": "latest",
     "bootstrap": "latest",
     "less-middleware": "latest",
     "chart.js": "latest",
