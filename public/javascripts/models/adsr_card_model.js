@@ -21,9 +21,9 @@ function AdsrCardModel(params) {
   } 
   // OscCardModel and AdsrCardModel have this.audioNode for each note number.
   this.audioNode = [];
-  for(var i = 48; i < 62; i++) {
-    this.audioNode[i] = context.createGain();
-  } 
+  //for(var i = 48; i < 62; i++) {
+  //  this.audioNode[i] = context.createGain();
+  //} 
 }
 
 
@@ -51,15 +51,10 @@ AdsrCardModel.prototype = {
     this.audioNode[noteNum].gain.linearRampToValueAtTime(decayLevel, attackTime);
     //decay
     this.audioNode[noteNum].gain.setTargetAtTime(sustainLevel, attackTime, decayTime);
-   // console.log("attackTime: " + attackTime + ", decayTime: " + decayTime + ", decayLevel: " + decayLevel + ", sustainLevel: " + sustainLevel);
+    //console.log("attackTime: " + attackTime + ", decayTime: " + decayTime + ", decayLevel: " + decayLevel + ", sustainLevel: " + sustainLevel);
   },
 
   stop: function(noteNum) {
-    var currentTime = context.currentTime;
-    this.audioNode[noteNum].gain.cancelScheduledValues(currentTime);
-    this.audioNode[noteNum].gain.setValueAtTime(this.audioNode[noteNum].gain.value, currentTime);
-    // releaseTime: 0 - 3[s]
-    var releaseTime = (this.ctrls['Release'].value - 120) / 300;
-    this.audioNode[noteNum].gain.linearRampToValueAtTime(0, currentTime + releaseTime);
+    this.audioNode[noteNum] = null;
   }
 }

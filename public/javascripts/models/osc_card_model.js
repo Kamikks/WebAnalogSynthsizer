@@ -14,10 +14,6 @@ function OscCardModel(params) {
 
 OscCardModel.prototype = {
   play: function(noteNum) {
-    if(this.audioNode[noteNum]) {
-      this.audioNode[noteNum].disconnect(0);
-      this.audioNode[noteNum] = null;
-    }
     this.audioNode[noteNum] = context.createOscillator();
 
     var freq = KEYC * Math.pow(1.0595, noteNum);
@@ -33,15 +29,14 @@ OscCardModel.prototype = {
       this.next[i].play(this.sendLevel[noteNum], noteNum);
 
       //this.audioNode[noteNum].stop(0);
-      this.audioNode[noteNum].start(0);
     }
+    this.audioNode[noteNum].start(0);
   },
 
   stop: function(noteNum) {
     for(var i=0; i<this.next.length; i++) {
       this.next[i].stop(noteNum);
     }
-    var currentTime = context.currentTime;
-    this.audioNode[noteNum].stop(currentTime + 1);
+    this.audioNode[noteNum].stop(1);
   }
 }
